@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Rubik;
+}
+
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 250px;
+        position: fixed;
+        top: 0;
+        left: -100%;
+        z-index: 1000;
+        height: 100vh;
+        transition: left 0.3s ease;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    .menu-toggle-btn {
+        display: block;
+        font-size: 22px;
+        color: black;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+
+    .main {
+        flex-direction: column;
+    }
+
+    .navbar .inner {
+        gap: 10px;
+    }
+
+
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+}
+
+@media (min-width: 1025px) {
+    .menu-toggle-btn {
+        display: none;
+    }
+}
