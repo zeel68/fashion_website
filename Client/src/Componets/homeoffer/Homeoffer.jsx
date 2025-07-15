@@ -5,9 +5,18 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { FreeMode, Pagination, Navigation } from 'swiper/modules';
+import { FreeMode, Navigation } from 'swiper/modules';
+import { useContext } from 'react';
+import { ProductContext } from '../Context';
 
-const Homeoffer = () => {
+
+const Homeoffer = ({ category }) => {
+
+    const { products } = useContext(ProductContext);
+
+    const filteredProducts = category
+        ? products.filter(p => p.category?.toLowerCase() === category.toLowerCase())
+        : products;
     return (
         <>
             <div className='main py-[15px]'>
@@ -53,14 +62,27 @@ const Homeoffer = () => {
                                 1024: { slidesPerView: 5 },
                             }}
                         >
-                            <SwiperSlide><Offerprop img="./assets/img/celebs1.jpg" /></SwiperSlide>
+                            {filteredProducts.map((product, index) => (
+                                <SwiperSlide key={index}>
+                                    <Trendprop
+                                        id={product.id}
+                                        image={product.image}
+                                        // img2={product.img2}
+                                        // name={product.name}
+                                        // price={product.price}
+                                        // oldprice={product.oldprice}
+                                        // delivery={product.delivery}
+                                    />
+                                </SwiperSlide>
+                            ))}
+                            {/* <SwiperSlide><Offerprop img="./assets/img/celebs1.jpg" /></SwiperSlide>
                             <SwiperSlide><Offerprop img="./assets/img/celebs2.jpg" /></SwiperSlide>
                             <SwiperSlide><Offerprop img="./assets/img/celebs3.jpg" /></SwiperSlide>
                             <SwiperSlide><Offerprop img="./assets/img/celebs4.jpg" /></SwiperSlide>
                             <SwiperSlide><Offerprop img="./assets/img/celebs5.jpg" /></SwiperSlide>
                             <SwiperSlide><Offerprop img="./assets/img/celebs6.jpg" /></SwiperSlide>
                             <SwiperSlide><Offerprop img="./assets/img/celebs7.jpg" /></SwiperSlide>
-                            <SwiperSlide><Offerprop img="./assets/img/celebs8.jpg" /></SwiperSlide>
+                            <SwiperSlide><Offerprop img="./assets/img/celebs8.jpg" /></SwiperSlide> */}
                         </Swiper>
                     </div>
                 </div>

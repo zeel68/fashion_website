@@ -16,7 +16,7 @@ const Landing = () => {
         <>
             <Hero />
             <Homebox />
-            <Homeoffer />
+            <Homeoffer category="sarees" />
             <Boxbnr />
             <Trenditem category="Mens" />
             <Womensbnr />
