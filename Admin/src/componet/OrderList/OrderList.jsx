@@ -62,7 +62,7 @@ const OrderList = () => {
                         </div>
                     </div>
 
-                    <div className="bg-white rounded-md p-[15px] shadow-md mt-4">
+                    <div className="bg-white rounded-md p-[15px] shadow-md mt-[10px]">
                         <p className="text-lg font-semibold mb-4">Recent Orders</p>
                         <hr className='text-[#ddddda] py-[5px]' />
 

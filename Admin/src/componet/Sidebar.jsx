@@ -23,12 +23,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
                             <div className="m-[15px] flex flex-col gap-2">
                                 <NavLink
-                                    to="/home"
-                                    end
+                                    to="/home" end
                                     className={({ isActive }) =>
-                                        `flex rounded-[10px] p-[10px] items-center ${isActive ? 'bg-[#00538A] text-white' : 'hover:bg-[#00538A] hover:text-white'
-                                        }`
-                                    }
+                                        `flex rounded-[10px] p-[10px] items-center ${isActive ? 'bg-[#00538A] text-white' : 'hover:bg-[#00538A] hover:text-white'}`}
                                 >
                                     <MdOutlineDashboard className="m-[5px]" />
                                     <p className="ml-[15px] p-[5px] font-medium text-[14px] tracking-tight uppercase">DASHBOARD</p>
@@ -60,7 +57,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                             <div className="flex text-[#232323] relative justify-start items-center cursor-pointer hover:rounded-md hover:bg-[#00538A] hover:text-[#ffffff] " onClick={toggleShop}>
                                 <p className='px-[20px] py-[10px]'>Categories</p>
                                 <i className="fa-solid fa-chevron-down absolute right-2 text-[16px] font-semibold"></i>
-                                
+
                             </div>
                             {menu && (
                                 <div className="ml-[15px] block transition-all duration-300 ease-in-out">

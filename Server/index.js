@@ -219,7 +219,7 @@ const fetchUser = (req, res, next) => {
   if (!token) return res.status(401).json({ error: "Access denied" });
 
   try {
-    const data = jwt.verify(token, 'secret_ecom'); 
+    const data = jwt.verify(token, 'secret_ecom');
     req.user = data.user;
     next();
   } catch {
@@ -251,11 +251,33 @@ app.post('/removefromcart', fetchUser, async (req, res) => {
 })
 
 // again login  fetch addtocart data
-app.post('/getcart', fetchUser, async (req, res) => {
+// app.post('/getcart', fetchUser, async (req, res) => {
 
-  let userData = await WebUsers.findOne({ _id: req.user.id });
-  res.json(userData.cartData);
-})
+//   let userData = await WebUsers.findOne({ _id: req.user.id });
+//   res.json(userData.cartData);
+// })
+
+app.post('/getcart', fetchUser, async (req, res) => {
+  try {
+    // Check if req.user and req.user.id exist
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+
+    const userData = await WebUsers.findOne({ _id: req.user.id });
+
+    if (!userData) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    // Ensure cartData is always an array or object
+    res.json(userData.cartData || []);
+  } catch (error) {
+    console.error("Error in /getcart:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+});
+
 
 app.use('/api/order', orderRouter);
 app.use('/api/auth', authRoutes);
