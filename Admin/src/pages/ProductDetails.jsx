@@ -5,7 +5,7 @@ import Footer from '../componet/Footer/Footer'
 const ProductDetails = () => {
     return (
         <>
-            <div className="bg-[#E0F0FB]">
+            <div className="bg-[#E0F0FB] min-h-screen flex flex-col">
                 <ProductD />
                 <Footer />
             </div>

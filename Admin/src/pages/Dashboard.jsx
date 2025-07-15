@@ -9,7 +9,7 @@ import Footer from '../componet/Footer/Footer'
 const Dashboard = () => {
     return (
         <>
-            <div className="bg-[#DCE9F2] font-Rubik">
+            <div className="font-Rubik min-h-screen flex flex-col">
                 <Hometop />
                 <Ordercard />
                 <Graph />

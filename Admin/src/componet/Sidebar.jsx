@@ -60,19 +60,34 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                             <div className="flex text-[#232323] relative justify-start items-center cursor-pointer hover:rounded-md hover:bg-[#00538A] hover:text-[#ffffff] " onClick={toggleShop}>
                                 <p className='px-[20px] py-[10px]'>Categories</p>
                                 <i className="fa-solid fa-chevron-down absolute right-2 text-[16px] font-semibold"></i>
+                                
                             </div>
                             {menu && (
                                 <div className="ml-[15px] block transition-all duration-300 ease-in-out">
-                                    <ul className='list-none'>
-                                        <li className='p-[7px] transition-all duration-500'><Link to="/home" className="flex justify-between items-center">Lorem ipsum
+                                    <ul className='list-none text-[14px]'>
+                                        <li className='p-[7px] transition-all duration-500'><Link to="/home" className="flex justify-between items-center">Women_clothing
                                             <span className="bg-[#E7E7E3] text-black text-sm rounded px-[10px] py-[7px] hover:bg-[#00538A] hover:text-[#ffffff]">21</span></Link></li>
-                                        <li className='p-[7px] transition-all duration-500 '><Link to="/home" className="flex justify-between items-center">Lorem ipsum
+                                        <li className='p-[7px] transition-all duration-500 '><Link to="/home" className="flex justify-between items-center">KurtaSet
                                             <span className="bg-[#E7E7E3] text-black text-sm rounded px-[10px] py-[7px] hover:bg-[#00538A] hover:text-[#ffffff]">21</span></Link></li>
-                                        <li className='p-[7px] transition-all duration-500'><Link to="/home" className="flex justify-between items-center">Lorem ipsum
+                                        <li className='p-[7px] transition-all duration-500'><Link to="/home" className="flex justify-between items-center">SalwarKameez
                                             <span className="bg-[#E7E7E3] text-black text-sm rounded px-[10px] py-[7px] hover:bg-[#00538A] hover:text-[#ffffff]">21</span></Link></li>
-                                        <li className='p-[7px] transition-all duration-500'><Link to="/home" className="flex justify-between items-center">Lorem ipsum
+                                        <li className='p-[7px] transition-all duration-500'><Link to="/home" className="flex justify-between items-center">Lehengas
                                             <span className="bg-[#E7E7E3] text-black text-sm rounded px-[10px] py-[7px] hover:bg-[#00538A] hover:text-[#ffffff]">21</span></Link></li>
-                                        <li className='p-[7px] transition-all duration-500'><Link to="/home" className="flex justify-between items-center">Lorem ipsum
+                                        <li className='p-[7px] transition-all duration-500'><Link to="/home" className="flex justify-between items-center">Sarees
+                                            <span className="bg-[#E7E7E3] text-black text-sm rounded px-[10px] py-[7px] hover:bg-[#00538A] hover:text-[#ffffff]">21</span></Link></li>
+                                        <li className='p-[7px] transition-all duration-500'><Link to="/home" className="flex justify-between items-center">Mens
+                                            <span className="bg-[#E7E7E3] text-black text-sm rounded px-[10px] py-[7px] hover:bg-[#00538A] hover:text-[#ffffff]">21</span></Link></li>
+                                        <li className='p-[7px] transition-all duration-500 '><Link to="/home" className="flex justify-between items-center">Kids
+                                            <span className="bg-[#E7E7E3] text-black text-sm rounded px-[10px] py-[7px] hover:bg-[#00538A] hover:text-[#ffffff]">21</span></Link></li>
+                                        <li className='p-[7px] transition-all duration-500'><Link to="/home" className="flex justify-between items-center">Jewellery
+                                            <span className="bg-[#E7E7E3] text-black text-sm rounded px-[10px] py-[7px] hover:bg-[#00538A] hover:text-[#ffffff]">21</span></Link></li>
+                                        <li className='p-[7px] transition-all duration-500'><Link to="/home" className="flex justify-between items-center">Blouses
+                                            <span className="bg-[#E7E7E3] text-black text-sm rounded px-[10px] py-[7px] hover:bg-[#00538A] hover:text-[#ffffff]">21</span></Link></li>
+                                        <li className='p-[7px] transition-all duration-500'><Link to="/home" className="flex justify-between items-center">Dupattas
+                                            <span className="bg-[#E7E7E3] text-black text-sm rounded px-[10px] py-[7px] hover:bg-[#00538A] hover:text-[#ffffff]">21</span></Link></li>
+                                        <li className='p-[7px] transition-all duration-500'><Link to="/home" className="flex justify-between items-center">Festivals
+                                            <span className="bg-[#E7E7E3] text-black text-sm rounded px-[10px] py-[7px] hover:bg-[#00538A] hover:text-[#ffffff]">21</span></Link></li>
+                                        <li className='p-[7px] transition-all duration-500'><Link to="/home" className="flex justify-between items-center">Home_Living
                                             <span className="bg-[#E7E7E3] text-black text-sm rounded px-[10px] py-[7px] hover:bg-[#00538A] hover:text-[#ffffff]">21</span></Link></li>
                                     </ul>
                                 </div>

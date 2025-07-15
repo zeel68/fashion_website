@@ -1,21 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Breadcrum from '../Breadcrum/Breadcrum';
 import { FaRegCalendarAlt, FaAngleRight } from "react-icons/fa";
-import Orderprop from './OrderProp';
-import orders from './Orders';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const OrderList = () => {
-    const [currentPage, setCurrentPage] = useState(1);
-    const ordersPerPage = 8;
+    const [Orders, setOrders] = useState([]);
 
-    const totalPages = Math.ceil(orders.length / ordersPerPage);
-    const indexOfLast = currentPage * ordersPerPage;
-    const indexOfFirst = indexOfLast - ordersPerPage;
-    const currentOrders = orders.slice(indexOfFirst, indexOfLast);
+    const fetchAllOrders = async () => {
+        try {
+            const response = await axios.get("http://localhost:4040/api/order/list");
+            if (response.data.success) {
+                setOrders(response.data.data);
+                console.log("Fetched Orders:", response.data.data);
+            } else {
+                toast.error("Failed to fetch orders");
+            }
+        } catch (err) {
+            toast.error("Server error");
+            console.error(err);
+        }
+    };
 
-    // drop down title
-    const [menu, setmenu] = useState(false);
-    const toggleShop = () => setmenu(!menu);
+    const statusHandler = async (event, orderId) => {
+        const newStatus = event.target.value;
+        try {
+            const response = await axios.post("http://localhost:4040/api/order/status", {
+                orderId,
+                status: newStatus
+            });
+            if (response.data.success) {
+                toast.success("Order status updated");
+                fetchAllOrders();
+            } else {
+                toast.error("Failed to update status");
+            }
+        } catch (err) {
+            console.error(err);
+            toast.error("Something went wrong");
+        }
+    };
+
+    useEffect(() => {
+        fetchAllOrders();
+    }, []);
 
     return (
         <>
@@ -26,83 +54,79 @@ const OrderList = () => {
                             <h2 className="text-2xl font-semibold text-gray-800">Order List</h2>
                             <Breadcrum className="text-[#00538A]" current="Dashboard" />
                         </div>
-                        <div className="left ">
+                        <div className="left">
                             <div className="text-sm font-medium flex items-center text-gray-700">
                                 <FaRegCalendarAlt className="mr-[5px] text-base" />
                                 Oct 11, 2023 - Nov 11, 2023
                             </div>
-
-                            <div className="toggle py-[10px] w-full max-w-[200px]">
-                                <div
-                                    className="flex relative justify-between items-center cursor-pointer rounded-md shadow-md bg-white text-black px-[20px] py-[10px] hover:bg-gray-100"
-                                    onClick={toggleShop}
-                                >
-                                    <p>Change Status</p>
-                                    <i className="fa-solid fa-chevron-down text-[14px] font-semibold"></i>
-                                </div>
-
-                                {menu && (
-                                    <div className="absolute z-10 mt-2 w-[15%] bg-white rounded-md shadow-lg border border-gray-200 transition-all duration-300 ease-in-out">
-                                        <ul className="list-none divide-y divide-gray-200">
-                                            <li className="px-[15px] py-[10px] hover:bg-[#00538A] hover:text-white cursor-pointer transition-all duration-300">Delivered</li>
-                                            <li className="px-[15px] py-[10px] hover:bg-[#FFA52F] hover:text-white cursor-pointer transition-all duration-300">Canceled</li>
-                                        </ul>
-                                    </div>
-                                )}
-                            </div>
-
                         </div>
                     </div>
 
                     <div className="bg-white rounded-md p-[15px] shadow-md mt-4">
                         <p className="text-lg font-semibold mb-4">Recent Orders</p>
                         <hr className='text-[#ddddda] py-[5px]' />
-                        <div className="overflow-x-auto">
-                            <table className="min-w-full text-sm text-left">
-                                <thead className="border-b border-[#ddddda] font-medium text-[#232321CC]">
-                                    <tr>
-                                        <th></th>
-                                        <th className="p-[15px]">Product</th>
-                                        <th className="p-[15px]">Order ID</th>
-                                        <th className="p-[15px]">Date</th>
-                                        <th className="p-[15px]">Customer Name</th>
-                                        <th className="p-[15px]">Status</th>
-                                        <th className="p-[15px]">Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {currentOrders.map((order, idx) => (
-                                        <Orderprop key={idx} {...order} />
-                                    ))}
-                                </tbody>
 
-                            </table>
+                        <div className="flex flex-wrap gap-4">
+                            {Orders.map((order, index) => (
+                                <div key={index} className="flex justify-between items-start text-[14px] bg-white p-[10px] rounded shadow w-full md:w-[48%] lg:w-[32%]">
+                                    <img src="../src/assets/box.png" alt="img" className="w-[10%] h-90%] object-cover " />
+
+                                    <div className="text-[14px] w-[40%]">
+                                        <p className="font-normal pb-[10px] flex flex-wrap">
+                                            {order.items.map((item, idx) => (
+                                                <span key={idx}>
+                                                    {item.name}x{item.quantity}
+                                                    {idx !== order.items.length - 1 && ", "}
+                                                </span>
+                                            ))}
+                                        </p>
+
+                                        <p className='text-gray-600'>{order.firstname} {order.lastname}</p>
+
+                                        <div className='text-gray-600'>
+                                            <p>{order.address.street},</p>
+                                            <p>{order.address.city}, {order.address.state}, {order.address.country}, {order.address.zipcode}</p>
+                                        </div>
+                                        <p className='text-gray-600'>{order.address.phone}</p>
+                                    </div>
+
+                                    <p className='w-[10%]'>Items: {order.items.length}</p>
+                                    <p className='w-[10%]'>${order.amount}</p>
+
+                                    {
+                                        (order.status === "Cancelled" || order.status === "Returned") ? (
+                                            <p className={`px-3 py-1 rounded text-black text-sm font-semibold w-[20%] text-center
+                                         ${order.status === "Cancelled" ? "text-red-500 " : "text-yellow-500"}`}>
+                                                {order.status}
+                                            </p>
+                                        ) : (
+                                            <select
+                                                onChange={(event) => statusHandler(event, order._id)}
+                                                value={order.status}
+                                                className='border p-[10px] w-[15%] rounded-md'
+                                            >
+                                                <option value="processing">Processing</option>
+                                                <option value="Out for Delivery">Out for Delivery</option>
+                                                <option value="Delivered">Delivered</option>
+                                            </select>
+                                        )
+                                    }
+
+                                    {/* <select
+                                        onChange={(event) => statusHandler(event, order._id)}
+                                        value={order.status}
+                                        className='border p-[10px] w-[15%] rounded-m'
+                                    >
+                                        <option value="processing">Processing</option>
+                                        <option value="Out for Delivery">Out for Delivery</option>
+                                        <option value="Delivered">Delivered</option>
+                                       
+                                    </select> */}
+                                </div>
+                            ))}
                         </div>
                     </div>
 
-                    {/* page 1 to ..10 */}
-                    <div className="py-[20px] flex flex-wrap items-center">
-                        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                            <button
-                                key={page}
-                                onClick={() => setCurrentPage(page)}
-                                className={`border px-[12px] py-[5px] m-[5px] rounded-md ${currentPage === page
-                                    ? 'bg-[#00538A] text-white'
-                                    : 'hover:bg-[#00538A] hover:text-white'
-                                    }`}
-                            >
-                                {page}
-                            </button>
-                        ))}
-                        {currentPage < totalPages && (
-                            <button
-                                onClick={() => setCurrentPage(currentPage + 1)}
-                                className="border px-[15px] py-[5px] m-[5px] rounded-md hover:bg-[#00538A] hover:text-white flex items-center gap-1"
-                            >
-                                Next <FaAngleRight />
-                            </button>
-                        )}
-                    </div>
                 </div>
             </div>
         </>
