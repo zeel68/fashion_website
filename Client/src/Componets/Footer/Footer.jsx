@@ -12,7 +12,7 @@ const Footer = ({ items }) => {
     const [menuOpen, setMenuOpen] = useState(false);
 
     const shortText = `
-    <p>Welcome to the House of Indya, a world of fashion where traditions are fused with modern aesthetics and infused with an ultra-modern spirit to cater to the women of today. It is an authentic fashion brand quintessentially dedicated to Indian ethnic wear. We like to call ourselves a pioneer in prêt modern-ethnic wear, trying to make Indian fashion approachable and affordable to all by eliminating the meticulous hopping between shops and pain-staking efforts.</p>
+    <p>Welcome to the House of Dhaneri, a world of fashion where traditions are fused with modern aesthetics and infused with an ultra-modern spirit to cater to the women of today. It is an authentic fashion brand quintessentially dedicated to Indian ethnic wear. We like to call ourselves a pioneer in prêt modern-ethnic wear, trying to make Indian fashion approachable and affordable to all by eliminating the meticulous hopping between shops and pain-staking efforts.</p>
   `;
     const items1 = [
         "Indian Jewelry", "Women Bags", "Ladies Footwear",

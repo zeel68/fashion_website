@@ -12,7 +12,7 @@ const Wholesale = () => {
                         <form action="">
                             <div className="bg-[#fdfdfd] border border-[#e5e5e5] my-[10px] py-[20px] px-[30px] box-border">
                                 <div className="text-center">
-                                    <h4 className='text-[20px] font-bold text-[#D3b951]'>Interested in selling Indya clothes & accessories?</h4>
+                                    <h4 className='text-[20px] font-bold text-[#D3b951]'>Interested in selling Dhaneri clothes & accessories?</h4>
                                     <h5 className='text-[15px] font-bold mt-[20px] leading-[22px]'>Place a bulk order request with us.</h5>
                                     <h6 className='text-[12px] font-bold leading-[20px] mt-[10px]'>Fill out this easy application and our team will get in touch with you within the next 24-48 hours.</h6>
                                 </div>

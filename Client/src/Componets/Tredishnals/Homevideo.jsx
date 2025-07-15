@@ -79,10 +79,10 @@ const Homevideo = () => {
                     </div>
 
                     <div className="text w-[60%] px-[50px]">
-                        <h4 className='text-[40px] font-semibold pt-[20px]'>Nikhil Thampi X Indya</h4>
+                        <h4 className='text-[40px] font-semibold pt-[20px]'>Nikhil Thampi X Dhaneri</h4>
                         <span className='bg-[#000] w-[155px] h-[5px] block my-[10px]'></span>
                         <p className='text-[16px] font-semibold mb-[30px] leading-8'>
-                            Indya proudly presents an exclusive collaboration with the visionary designer Nikhil Thampi. Explore a collection inspired by the Taj Mahal's architectural wonder, showcasing exquisite silhouettes, delicate paisley floral, embroidered motifs, and intricate filigree foliage. Immerse yourself in the rich palette of jewel tones and regal accents, experiencing timeless grandeur and festive glamour that harmoniously fuses tradition with contemporary finesse.
+                            Dhaneri proudly presents an exclusive collaboration with the visionary designer Nikhil Thampi. Explore a collection inspired by the Taj Mahal's architectural wonder, showcasing exquisite silhouettes, delicate paisley floral, embroidered motifs, and intricate filigree foliage. Immerse yourself in the rich palette of jewel tones and regal accents, experiencing timeless grandeur and festive glamour that harmoniously fuses tradition with contemporary finesse.
                         </p>
                         <div className="flex justify-center">
                             <a className='bg-[#000] text-[#fff] rounded-full font-semibold uppercase text-[17px] px-[20px] py-[10px]' href="">SHOP THE COLLECTION</a>

@@ -22,7 +22,6 @@ const Navbar = ({ category }) => {
 
     // login pop-pop
     const [showLogin, setShowLogin] = useState(false);
-
     const [open, setOpen] = useState(false);
 
     return (
@@ -35,8 +34,9 @@ const Navbar = ({ category }) => {
 
                 <div className="border-b border-b-[#ccc]">
                     <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="top-[30px] h-[60px] flex flex-wrap justify-end items-center p-[7px]">
-                            <Link to={'/'}><img src="/assets/img/logo.png" className='object-center object-cover w-[60px]' alt="Site Logo" /></Link>
+
+                        <div className="top-[30px] h-[60px] flex flex-wrap justify-end items-center mb-[10px]">
+                            <Link to={'/'} className='px-[50px]'><img src="/assets/img/dhaneri.png" className='object-center object-cover w-[70px] ' alt="Site Logo" /></Link>
                             <ul className='flex flex-wrap mx-5 text-[11px]'>
                                 <li><Link to={'/WeddingGuide'} className='px-2 text-red-700'>Wedding Guide 2025</Link><span className="text-[#ccc]">|</span></li>
                                 <li><Link className='px-2'>Track Order</Link><span className="text-[#ccc]">|</span></li>

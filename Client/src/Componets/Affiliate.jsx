@@ -12,10 +12,10 @@ const Affiliate = () => {
                             <div className="pt-[1.5rem]">
                                 <div className="pb-[2rem]">
                                     <h4 className='font-bold text-[1.5rem]'>
-                                        What is Indya’s affiliate program?
+                                        What is Dhaneri’s affiliate program?
                                     </h4>
                                     <p className='pt-[1rem] text-[15px] leading-[1.6]'>
-                                        Our Affiliate program gives you an opportunity to refer Indya products to your friends / family & earn huge commission and lucrative offers.
+                                        Our Affiliate program gives you an opportunity to refer Dhaneri products to your friends / family & earn huge commission and lucrative offers.
                                     </p>
                                 </div>
                                 <div className="pb-[2rem]">
@@ -91,7 +91,7 @@ const Affiliate = () => {
                             <div className="py-[10px] relative">
                                 <label htmlFor="" className='text-[14px]'>
                                     <input type="checkbox" className='mr-[10px]' name="" id="" />
-                                    By Signing up, I agree to houseofindya.com
+                                    By Signing up, I agree to houseofDhaneri.com
                                     <Link className="ml-[10px] text-[#d4b952] underline">Terms & Condition</Link>
                                 </label>
                             </div>
@@ -103,12 +103,12 @@ const Affiliate = () => {
 
                             <div className="pb-[2rem]">
                                 <h4 className='font-bold text-[1.5rem]'>
-                                    About Indya
+                                    About Dhaneri
                                 </h4>
                                 <p className='pt-[1rem] text-[15px] leading-[1.6]'>
 
 
-                                    Since its inception in 2016, Indya has emerged as one of India’s leading fashion brands for modern
+                                    Since its inception in 2016, Dhaneri has emerged as one of India’s leading fashion brands for modern
                                     festive wear. Driven by our philosophy of reinventing Indian fashion, our styles are loved by women
                                     across 25 countries.  We have a very strong digital brand presence, with a 1 million + followers on social
                                     media. Our extensive ecommerce business (also available on Mytnra, Ajio and Amazon) is partnered by
