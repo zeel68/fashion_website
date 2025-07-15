@@ -16,7 +16,7 @@ const Itemprop = ({ id, img, info, name, price, details, sales, remaining, total
 
     return (
         <>
-            <div className="main" onClick={handleRowClick}>
+            <div className="main " onClick={handleRowClick}>
                 <div className="w-full p-[15px] bg-white shadow-md rounded" >
 
                     <div className="flex items-start justify-between gap-4 mb-4">

@@ -5,7 +5,7 @@ import OrderList from '../componet/OrderList/Orderlist'
 const Orderlists = () => {
     return (
         <>
-            <div className="bg-[#E0F0FB]">
+            <div className="bg-[#E0F0FB] min-h-screen flex flex-col">
                 <OrderList />
                 <Footer />
             </div>
