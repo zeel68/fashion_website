@@ -244,7 +244,7 @@ const SareesDetails = [
     }, {
         id: 25,
         img: "/assets/img/menstrend1.jpg",
-        img2: "/assets/img/menstrend1.jpg",
+        img2: "/assets/img/menstrend2.jpg",
         name: "Red Embroidered Poly Blend Saree Set",
         price: "4600",
         oldprice: "11500",
@@ -254,7 +254,7 @@ const SareesDetails = [
     {
         id: 26,
         img: "/assets/img/menstrend2.jpg",
-        img2: "/assets/img/menstrend2.jpg",
+        img2: "/assets/img/menstrend1.jpg",
         name: "Red Embroidered Poly Blend Saree Set",
         price: "4600",
         oldprice: "11500",
@@ -264,7 +264,7 @@ const SareesDetails = [
     {
         id: 27,
         img: "/assets/img/menstrend3.jpg",
-        img2: "/assets/img/menstrend3.jpg",
+        img2: "/assets/img/menstrend4.jpg",
         name: "Red Embroidered Poly Blend Saree Set",
         price: "4600",
         oldprice: "11500",
@@ -273,7 +273,7 @@ const SareesDetails = [
     }, {
         id: 28,
         img: "/assets/img/menstrend4.jpg",
-        img2: "/assets/img/menstrend4.jpg",
+        img2: "/assets/img/menstrend3.jpg",
         name: "Red Embroidered Poly Blend Saree Set",
         price: "4600",
         oldprice: "11500",
@@ -398,7 +398,7 @@ const SareesDetails = [
     {
         id: 40,
         img: "/assets/img/menstrend5.jpg",
-        img2: "/assets/img/menstrend5.jpg",
+        img2: "/assets/img/menstrend4.jpg",
         name: "Red Embroidered Poly Blend Saree Set",
         price: "4600",
         oldprice: "11500",
@@ -407,7 +407,7 @@ const SareesDetails = [
     },
     {
         id: 41,
-        img: "/assets/img/menstrend5.jpg",
+        img: "/assets/img/menstrend3.jpg",
         img2: "/assets/img/menstrend5.jpg",
         name: "Red Embroidered Poly Blend Saree Set",
         price: "4600",

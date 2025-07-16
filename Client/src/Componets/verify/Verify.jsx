@@ -32,7 +32,7 @@ const Verify = () => {
 
     return (
         <div className="py-[15px]">
-            <div className="max-w-screen-xl mx-auto px-[15px]">
+            <div className="max-w-screen-xxl mx-auto px-[15px]">
                 <div className="min-h-[60vh] grid">
                     <div className="w-[100px] h-[100px] self-center border-8 border-[#bdbdbd] border-t-red-600 rounded-[50%] animate-spin" />
                 </div>

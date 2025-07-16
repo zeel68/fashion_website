@@ -85,7 +85,7 @@ const PlaceOrder = ({ category }) => {
 
     return (
         <div className="py-[15px]">
-            <div className="max-w-screen-xl mx-auto px-[15px]">
+            <div className="max-w-screen-xxl mx-auto px-[15px]">
                 <div className="inner-main">
                     <form onSubmit={placeorder} className="flex flex-wrap gap-8 justify-between m-[70px]">
                         {/* Left Section - Delivery Info */}

@@ -88,7 +88,7 @@ const Storelocator = () => {
 
     return (
         <>
-            <div className="max-w-[1440px] mx-auto px-4 py-10">
+            <div className="max-w-screen-xxl mx-auto px-4 py-10">
                 {/* top */}
                 <div className="text-center mb-8">
                     <h2 className="text-[40px] font-bold uppercase text-[#d3b951]">

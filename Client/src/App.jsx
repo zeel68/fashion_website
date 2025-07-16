@@ -30,6 +30,7 @@ import Customerstories from './Componets/Testimonial/Customerstories';
 import PlaceOrder from './Componets/Addcart/PlaceOrder';
 import Verify from './Componets/verify/Verify';
 import Myorder from './Componets/verify/Myorder';
+import TreckOrder from './Componets/TreckOrder';
 
 
 function App() {
@@ -66,6 +67,7 @@ function App() {
 
 
           <Route path='/WeddingGuide' element={<WeddingGuide />} />
+          <Route path='/treckorder' element={<TreckOrder />} />
           <Route path='/Wholesale' element={<Wholesale />} />
           <Route path='/Affiliate' element={<Affiliate />} />
           <Route path='/storelocatore' element={<Storelocator />} />

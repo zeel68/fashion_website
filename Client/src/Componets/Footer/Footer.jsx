@@ -31,7 +31,7 @@ const Footer = ({ items }) => {
     return (
         <>
             <div className='main bg-[#fffbed] mt-[30px]'>
-                <div className="max-w-screen-xl mx-auto px-[30px] py-[15px]">
+                <div className="max-w-screen-xxl mx-auto px-[30px] py-[15px]">
 
                     {/* <img className='w-full pr-[15%] m-[15px] border-b border-b-[#ededed]' src="./assets/img/footerlogo.png" alt="footer img" /> */}
 
@@ -77,8 +77,10 @@ const Footer = ({ items }) => {
                         <div className="border-r border-r-[#ededed] w-[40%] px-[70px]">
                             <div className="sighnup">
                                 <h3 className='flex justify-center text-[16px] font-bold pb-[10px] uppercase'>Newsletter Signup</h3>
-                                <input className='bg-[#fff] border text-[#b0b0b0] p-[10px] my-[10px] outline' type="text" placeholder='Enter Email Address' />
-                                <button className='uppercase bg-[#000] text-[#fff] mx-[5px] p-[10px]'>Subscribe</button>
+                                <div className="flex justify-center">
+                                    <input className='bg-[#fff] border text-[#b0b0b0] py-[10px] outline' type="text" placeholder='Enter Email Address' />
+                                    <button className='uppercase bg-[#000] text-[#fff] px-[10px]'>Subscribe</button>
+                                </div>
                             </div>
                             <div className='pt-[25px]'>
                                 <h3 className='flex justify-center text-[16px] font-bold pb-[10px] uppercase'>Connect With Us</h3>
@@ -95,7 +97,7 @@ const Footer = ({ items }) => {
 
                     {/* address and payment */}
                     <div className="flex py-[15px] border-b border-b-[#ededed]">
-                        <div className="border-r border-r-[#ededed] w-[40%] p-[15px]">
+                        <div className="border-r border-r-[#ededed] w-[40%] py-[15px]">
                             <h2 className='text-[16px] font-bold py-[20px] uppercase'>In case of any concern, Contact Us</h2>
                             <h2 className='text-[16px] font-bold uppercase'>Head Office Address:</h2>
                             <p>High Street Essentials Pvt Ltd <br />
@@ -104,10 +106,10 @@ const Footer = ({ items }) => {
                                 Customer Care: +91-8929987349 </p>
                             <p className='pt-[20px]'>Due to high call volumes, we're currently unavailable on calls. For a quicker resolution, please reach out to us directly on WhatsApp! </p>
                         </div>
-                        <div className="border-r border-r-[#ededed] w-[30%] p-[40px] ">
+                        <div className="border-r border-r-[#ededed] w-[30%] p-[40px]">
 
-                            <h2 className='text-[16px] font-bold pl-[5px] uppercase'>Return Address:</h2>
-                            <p className='flex justify-around'>High Street Essentials Pvt Ltd <br />
+                            <h2 className=' flex text-[16px] font-bold pl-[0px] uppercase'>Return Address:</h2>
+                            <p className=''>High Street Essentials Pvt Ltd <br />
                                 Plot No-39, Block-C, Sector-58, <br />
                                 Noida, Uttar Pradesh - 201301, India </p>
 

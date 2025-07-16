@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom'
 const WeddingGuide = () => {
     return (
         <>
-            <div className="block w-full">
+            <div className="block w-full max-w-screen-xxl mx-auto">
 
                 <img src="assets/img/g1.png" className='w-full' alt="" />
                 <img src="assets/img/g2.png" className='w-full' alt="" />
-                <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div className="max-w-screen-xxl mx-auto px-4 sm:px-6 lg:px-8">
 
                     <div className="flex justify-center align-middle items-center py-[3rem]">
                         <div className="w-[100%] max-w-[850px]">
@@ -52,6 +53,7 @@ const WeddingGuide = () => {
                         </div>
                     </div>
                 </div>
+
             </div>
         </>
     )

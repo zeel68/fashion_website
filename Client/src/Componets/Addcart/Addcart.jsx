@@ -26,7 +26,7 @@ const Addcart = ({ category }) => {
     return (
         <div className="main">
             <Carthader />
-            <div className="max-w-[1440px] mx-auto px-20">
+            <div className="max-w-screen-xxl mx-auto px-20">
                 <div className="flex justify-center text-[#d4b952] border border-[#d4b952] p-2 mb-4 text-[12px] font-semibold rounded">
                     Indya will never contact you to offer products, cash or any free gifts etc. Kindly do not respond, make payments or share any personal or bank information via call, mail or links.
                 </div>

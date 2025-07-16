@@ -18,14 +18,14 @@ const Landing = () => {
             {/* <Hero2 /> */}
             <Hero />
             <Homebox />
-            <Homeoffer category="sarees" />
+            {/* <Homeoffer category="sarees" /> */}
             <Boxbnr />
             <Trenditem category="Mens" />
             <Womensbnr />
             <Featured />
-            <Testimonial category={'customerstories'} />
+            <Testimonial category={'customerstories'} /> 
             <Tredishnalbnr />
-            <Homevideo />
+            {/* <Homevideo /> */}
             <Bestselr />
         </>
     )

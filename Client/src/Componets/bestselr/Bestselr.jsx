@@ -18,19 +18,19 @@ const Bestselr = () => {
                             </div>
                         </div>
 
-                        <div className="flex justify-center">
-                            <Link to="/Women-clothing">
+                        <div className="flex justify-center px-[5px]">
+                            <Link to="/Women-clothing" className='w-full'>
                                 <Bestslrprop img="./assets/img/bestslr1.jpg" />
                             </Link>
-                            <Link to="/Mens">
+                            <Link to="/Mens" className='w-full'>
                                 <Bestslrprop img="./assets/img/bestslr2.jpg" />
                             </Link>
 
-                            <Link to="/kids">
+                            <Link to="/kids" className='w-full'>
                                 <Bestslrprop img="./assets/img/bestslr3.jpg" />
                             </Link>
 
-                            <Link to="/Jewellery">
+                            <Link to="/Jewellery" className='w-full'>
                                 <Bestslrprop img="./assets/img/bestslr4.jpg" />
                             </Link>
 

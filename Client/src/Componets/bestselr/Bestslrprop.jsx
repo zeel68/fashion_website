@@ -4,7 +4,7 @@ const Bestslrprop = ({ img }) => {
     return (
         <>
             <div className="px-[10px] w-full">
-                <img className='w-full' src={img} alt="bestslr" />
+                <img className='w-full block' src={img} alt="bestslr" />
             </div>
         </>
     )

@@ -84,7 +84,7 @@ const Sareesitem = ({ category }) => {
 
     return (
         <div className='main py-[10px]'>
-            <div className="max-w-screen-xl mx-auto px-[15px]">
+            <div className="max-w-screen-xxl mx-auto px-[15px]">
                 <div className="inner-main flex w-full">
                     {/* Sidebar */}
                     <div className="right w-[20%] px-[5px]">

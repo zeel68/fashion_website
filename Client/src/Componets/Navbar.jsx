@@ -2,7 +2,8 @@ import React, { useContext, useState } from 'react'
 import { Link } from "react-router-dom";
 import { FaAngleDown, FaAngleRight, FaIndianRupeeSign } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
-import { IoBagHandle } from "react-icons/io5";
+// import { IoBagHandle } from "react-icons/io5";
+import { IoCartOutline } from "react-icons/io5";
 import { ProductContext } from './Context';
 import Login from './Login';
 
@@ -24,22 +25,27 @@ const Navbar = ({ category }) => {
     const [showLogin, setShowLogin] = useState(false);
     const [open, setOpen] = useState(false);
 
+
     return (
         <>
-            <div className="block font-['lato']">
+            <div className="block font-['lato'] max-w-screen-xxl  mx-auto">
 
                 <div className="h-[29px] bg-black top-0 w-full text-center text-white">
                     <p>THURSDAY TO SUNSLAY – LAST DAY | UP TO 60% OFF</p>
                 </div>
 
                 <div className="border-b border-b-[#ccc]">
-                    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className=" px-4 sm:px-6 lg:px-8">
 
-                        <div className="top-[30px] h-[60px] flex flex-wrap justify-end items-center mb-[10px]">
+                        <div className="w-full flex justify-center relative">
                             <Link to={'/'} className='px-[50px]'><img src="/assets/img/dhaneri.png" className='object-center object-cover w-[70px] ' alt="Site Logo" /></Link>
+                        </div>
+
+                        <div className=" h-[60px] w-full flex items-center justify-end mb-[10px] absolute top-9 left-2">
+
                             <ul className='flex flex-wrap mx-5 text-[11px]'>
                                 <li><Link to={'/WeddingGuide'} className='px-2 text-red-700'>Wedding Guide 2025</Link><span className="text-[#ccc]">|</span></li>
-                                <li><Link className='px-2'>Track Order</Link><span className="text-[#ccc]">|</span></li>
+                                <li><Link to={'/treckorder'} className='px-2'>Track Order</Link><span className="text-[#ccc]">|</span></li>
                                 <li><Link to={'/Wholesale'} className='px-2'>Wholesale</Link><span className="text-[#ccc]">|</span></li>
                                 <li><Link to={'/Affiliate'} className='px-2 text-red-700'>Affiliate</Link><span className="text-[#ccc]">|</span></li>
                                 <li><Link to={'/storelocatore'} className='px-2'>Store Locator</Link><span className="text-[#ccc]">|</span></li>
@@ -49,8 +55,13 @@ const Navbar = ({ category }) => {
                                     ? <button onClick={() => { localStorage.removeItem('auth-token'); window.location.replace("/") }}>Logout</button> :
                                     <li><Link onClick={() => setShowLogin(true)} className='px-2'>Login</Link><span className="text-[#ccc]">|</span></li>}
 
+                                <li>
+                                    <button onClick={() => setShowLogin(true)} className='px-2'>Signin</button>
+                                    <span className="text-[#ccc]">|</span>
+                                </li>
+
                                 {/* addtocart */}
-                                <li><Link to={'/cart'} className='relative px-2 flex flex-wrap align-middle justify-center'><IoBagHandle size={20} />
+                                <li><Link to={'/cart'} className='relative px-2 flex flex-wrap align-middle justify-center'><IoCartOutline size={20} />
                                     {totalCartItems > 0 && (
                                         <span className="absolute -top-1 -right-0 bg-[#d4b952] text-white text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">
                                             {totalCartItems}
@@ -65,7 +76,7 @@ const Navbar = ({ category }) => {
                 </div>
 
                 {/* mega menu*/}
-                <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+                <div className=" px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-wrap items-center my-[10px] justify-between">
                         <div className="flex flex-wrap m-[-15px]">
                             <ul className='flex flex-wrap'>
