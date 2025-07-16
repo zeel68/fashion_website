@@ -24,13 +24,21 @@ import Category from './Navbarpages/Category';
 import WeddingGuide from './Componets/WeddingGuide';
 import Wholesale from './Componets/Wholesale';
 import Affiliate from './Componets/Affiliate';
-import Landing from './pages/Landing';
+
 import Addcart from './Componets/Addcart/Addcart';
 import Customerstories from './Componets/Testimonial/Customerstories';
 import PlaceOrder from './Componets/Addcart/PlaceOrder';
 import Verify from './Componets/verify/Verify';
 import Myorder from './Componets/verify/Myorder';
-import TreckOrder from './Componets/TreckOrder';
+import Layout from './Componets/TreckOrder/Layout';
+import Profile from './Componets/TreckOrder/Profile';
+import Orders from './Componets/TreckOrder/Orders';
+import Wishlist from './Componets/TreckOrder/Wishlist';
+import Credits from './Componets/TreckOrder/Credits';
+import Vouchers from './Componets/TreckOrder/Vouchers';
+import Address from './Componets/TreckOrder/Address';
+import Contact from './Componets/TreckOrder/Contact';
+import Landing from './pages/landing';
 
 
 function App() {
@@ -64,10 +72,19 @@ function App() {
 
           <Route path='/customerstories' element={<Customerstories category={'customerstories'} />} />
 
-
-
           <Route path='/WeddingGuide' element={<WeddingGuide />} />
-          <Route path='/treckorder' element={<TreckOrder />} />
+
+          <Route path="/treckorder" element={<Layout />}>
+            <Route path='/treckorder/profile' element={<Profile />} />
+            <Route path='/treckorder/orders' element={<Orders />} />
+            <Route path='/treckorder/wishlist' element={<Wishlist />} />
+            <Route path='/treckorder/credits' element={<Credits />} />
+            <Route path='/treckorder/vouchers' element={<Vouchers />} />
+            <Route path='/treckorder/addresses' element={<Address />} />
+            <Route path='/treckorder/contactus' element={<Contact />} />
+            {/* <Route path='/treckorder/logout' element={<Profile />} /> */}
+          </Route>
+
           <Route path='/Wholesale' element={<Wholesale />} />
           <Route path='/Affiliate' element={<Affiliate />} />
           <Route path='/storelocatore' element={<Storelocator />} />
