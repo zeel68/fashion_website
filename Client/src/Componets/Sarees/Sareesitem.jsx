@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react'
 import Sareeprop, { Product } from './Sareeprop'
 import { IoMdArrowDropdown } from 'react-icons/io';
-// import Breadcrum from '../Breadcrum/Breadcrum';
+import Breadcrum from '../Breadcrum/Breadcrum';
 import { ProductContext } from '../Context';
+import SareesDetails from './Sareedetails';
 
 const filters = {
     Categories: [
@@ -61,7 +62,8 @@ const filters = {
 const Sareesitem = ({ category }) => {
 
     // const { SareesDetails } = useContext(ProductContext);
-    const { products } = useContext(ProductContext);
+
+    // const { products } = useContext(ProductContext);
     // if (!products) return (null)
 
     // const filtered = products.filter(item => item.category === category);
@@ -70,11 +72,12 @@ const Sareesitem = ({ category }) => {
     const [selected, setSelected] = useState("Relevance");
     const options = ["Relevance", "New Arrivals", "Price: Low to High", "Price: High to Low", "Best Sellers"];
 
-    // const filteredProducts = category
-    //     ? SareesDetails.filter((product) => product.category && product.category.toLowerCase() === category.toLowerCase()) : SareesDetails;
     const filteredProducts = category
-        ? products.filter(p => p.category?.toLowerCase() === category.toLowerCase())
-        : products;
+        ? SareesDetails.filter((product) => product.category && product.category.toLowerCase() === category.toLowerCase())
+        : SareesDetails;
+    // const filteredProducts = category
+    //     ? products.filter(p => p.category?.toLowerCase() === category.toLowerCase())
+    //     : products;
 
     // const path = [{ name: "Home", link: "/" }]
 
@@ -91,7 +94,7 @@ const Sareesitem = ({ category }) => {
 
                     {/* main section*/}
                     <div className="left w-[80%] px-[5px]">
-{/* 
+                        {/* 
                         <div className="breadcrum">
                             <Breadcrum path={path} current={category} />
                         </div> */}
@@ -132,12 +135,12 @@ const Sareesitem = ({ category }) => {
                         <div className="py-[15px]">
 
                             <div className="flex flex-wrap gap-4">
-
                                 {filteredProducts.map((product, index) => (
                                     <Product
                                         key={index}
                                         id={product.id}
-                                        image={product.image}
+                                        // image={product.image}
+                                        image={product.img}
                                         img2={product.img2}
                                         name={product.name}
                                         price={product.price}

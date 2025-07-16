@@ -16,7 +16,6 @@ const Productdetails = () => {
 
                         {/* left-side */}
                         <ProductTop />
-                        
                         {/* right-side */}
                         <ProductTopRight />
                         {/* bottom similary */}

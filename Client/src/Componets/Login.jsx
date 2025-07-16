@@ -80,7 +80,7 @@ const Login = ({ onClose }) => {
                         name='username'
                         value={formData.username}
                         onChange={changeHandaler}
-                        className='mt-1 text-[#6d6d6d] border border-[#ececec] w-full mb-3 p-4 outline-none rounded-md'
+                        className='mt-2 text-[#6d6d6d] border border-[#ececec] w-full mb-3 p-2 outline-none rounded-md'
                         type="text"
                         placeholder="Enter name"
                     />
@@ -90,7 +90,7 @@ const Login = ({ onClose }) => {
                     name='email'
                     value={formData.email}
                     onChange={changeHandaler}
-                    className='mt-1 text-[#6d6d6d] border border-[#ececec] w-full mb-3 p-4 outline-none rounded-md'
+                    className='mt-1 text-[#6d6d6d] border border-[#ececec] w-full mb-3 p-2 outline-none rounded-md'
                     type="text"
                     placeholder="Enter Mobile/Email"
                 />
@@ -98,14 +98,14 @@ const Login = ({ onClose }) => {
                     name='password'
                     value={formData.password}
                     onChange={changeHandaler}
-                    className='mt-1 text-[#6d6d6d] border border-[#ececec] w-full mb-3 p-4 outline-none rounded-md'
+                    className='mt-1 text-[#6d6d6d] border border-[#ececec] w-full mb-3 p-2 outline-none rounded-md'
                     type="password"
                     placeholder="Enter Password"
                 />
 
                 <button
                     onClick={() => { state === "Login" ? login() : signup() }}
-                    className='mt-6 bg-[#d4b952] text-white text-center text-sm py-4 w-full rounded-md'>
+                    className='mt-6 bg-[#d4b952] text-white text-center text-sm py-2 w-full rounded-md'>
                     Continue
                 </button>
 
@@ -123,12 +123,12 @@ const Login = ({ onClose }) => {
                     </p>
                 )}
 
-                <div className="relative text-center my-6">
+                <div className="relative text-center my-3">
                     <hr className="absolute top-1/2 left-0 w-full border-t border-gray-300 z-0" />
                     <span className="relative inline-block bg-white px-4 text-gray-500 z-10">Or continue with</span>
                 </div>
 
-                <div className="flex justify-center">
+                <div className="flex justify-center ">
                     <GoogleLogin
                         onSuccess={(credentialResponse) => {
                             const decoded = jwtDecode(credentialResponse.credential);
@@ -145,12 +145,6 @@ const Login = ({ onClose }) => {
                             console.log('Google Login Failed');
                         }}
                     />
-                </div>
-
-                <div className="flex justify-center">
-                    <button className='block text-[#a5a5a5] text-sm font-semibold mt-6' onClick={onClose}>
-                        Skip
-                    </button>
                 </div>
             </div>
         </div>
