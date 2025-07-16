@@ -2,7 +2,7 @@ import React from 'react'
 import { FaUser } from 'react-icons/fa'
 import { IoBagHandleOutline } from 'react-icons/io5'
 import { MdLocalShipping, MdLogin, MdPayment } from 'react-icons/md'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 const Carthader = () => {
     return (
@@ -15,29 +15,27 @@ const Carthader = () => {
                         </div>
                         <ul className='flex flex-wrap text-center'>
                             <li className='flex items-center justify-center text-center mx-2 my-2'>
-                                <Link className='hover:text-[#d4b952] text-[#adadad] py-[11px] px-[30px] flex flex-col items-center'><IoBagHandleOutline size={30} className='text-[17px] mb-[5px]' />Bag</Link>
+                                <NavLink to="/cart"
+                                    className="hover:text-[#d4b952] text-[#adadad] py-[11px] px-[30px] flex flex-col items-center aria-[current=page]:text-[#d4b952]">
+                                    <IoBagHandleOutline size={30} className="text-[17px] mb-[5px]" />Bag
+                                </NavLink>
+                            </li>
+                            {/* <li className='flex items-center justify-center text-center mx-2 my-2'>
+                                <Link className='hover:te[#d4b952] text-[#adadad] py-[11px] px-[30px] flex flex-col items-center'><MdLogin size={30} className='text-[17px] mb-[5px]' />Login</Link>
+                            </li> */}
+                            <li className='flex items-center justify-center text-center mx-2 my-2'>
+                                <Link to="/myorder" className='hover:text-[#d4b952] text-[#adadad] py-[11px] px-[30px] flex flex-col items-center'><MdLocalShipping size={30} className='text-[17px] mb-[5px]' />Shipping</Link>
                             </li>
                             <li className='flex items-center justify-center text-center mx-2 my-2'>
-                                <Link className='hover:text-[#d4b952] text-[#adadad] py-[11px] px-[30px] flex flex-col items-center'><MdLogin size={30} className='text-[17px] mb-[5px]' />Login</Link>
-                            </li>
-                            <li className='flex items-center justify-center text-center mx-2 my-2'>
-                                <Link className='hover:text-[#d4b952] text-[#adadad] py-[11px] px-[30px] flex flex-col items-center'><MdLocalShipping size={30} className='text-[17px] mb-[5px]' />Shipping</Link>
-                            </li>
-                            <li className='flex items-center justify-center text-center mx-2 my-2'>
-                                <Link className='hover:text-[#d4b952] text-[#adadad] py-[11px] px-[30px] flex flex-col items-center'><MdPayment size={30} className='text-[17px] mb-[5px]' />Payment</Link>
+                                <Link to="/placeorder" className='hover:text-[#d4b952] text-[#adadad] py-[11px] px-[30px] flex flex-col items-center'><MdPayment size={30} className='text-[17px] mb-[5px]' />Payment</Link>
                             </li>
                         </ul>
                         <div className="flex flex-wrap align-middle justify-between w-[80px] text-[#adadad]">
                             <Link className='flex flex-row items-center gap-3'><FaUser />Guest</Link>
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
-            
-
         </>
     )
 }

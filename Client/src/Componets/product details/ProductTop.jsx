@@ -8,12 +8,12 @@ import SareesDetails from '../Sarees/Sareedetails';
 const ProductTop = () => {
     // const { products } = useContext(ProductContext);
 
-    // const { id } = useParams();
-    // const product = products.find(item => item.id === parseInt(id));
+    const { id } = useParams();
+    const product = SareesDetails.find(item => item.id === parseInt(id));
 
-    // if (!product) {
-    //     return <div className="text-red-600 font-bold">Product not found</div>;
-    // }
+    if (!product) {
+        return <div className="text-red-600 font-bold">Product not found</div>;
+    }
 
     return (
         <div className="w-full max-w-[65%]">
@@ -22,7 +22,6 @@ const ProductTop = () => {
                 <img className="w-[48%]" src={product.img2} alt="img2" />
                 <img className="w-[48%]" src={product.img2} alt="img3" />
                 <img className="w-[48%]" src={product.img2} alt="img4" />
-            
             </div>
         </div>
     );

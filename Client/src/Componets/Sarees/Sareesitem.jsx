@@ -75,6 +75,7 @@ const Sareesitem = ({ category }) => {
     const filteredProducts = category
         ? SareesDetails.filter((product) => product.category && product.category.toLowerCase() === category.toLowerCase())
         : SareesDetails;
+        
     // const filteredProducts = category
     //     ? products.filter(p => p.category?.toLowerCase() === category.toLowerCase())
     //     : products;

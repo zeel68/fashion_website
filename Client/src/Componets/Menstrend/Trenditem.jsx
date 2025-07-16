@@ -4,26 +4,24 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { FreeMode, Pagination, Navigation, Autoplay } from 'swiper/modules';
+import { FreeMode, Navigation, Autoplay } from 'swiper/modules';
 import Trendprop from './trendprop';
 import { useContext } from 'react';
 import { ProductContext } from '../Context';
-
-// import SareesDetails from '../Sarees/Sareedetails';
+import SareesDetails from '../Sarees/Sareedetails';
 
 const Trenditem = ({ category }) => {
 
-    const { products } = useContext(ProductContext);
-    // const filteredProducts = category
-    //     ? products.filter((product) =>
-    //         product.category &&
-    //         product.category.toLowerCase() === category.toLowerCase()
-    //     )
-    //     : products;
-
+    // const { products } = useContext(ProductContext);
     const filteredProducts = category
-        ? products.filter(p => p.category?.toLowerCase() === category.toLowerCase())
-        : products;
+        ? SareesDetails.filter((product) => product.category && product.category.toLowerCase() === category.toLowerCase()
+        )
+        : SareesDetails;
+
+
+    // const filteredProducts = category
+    //     ? products.filter(p => p.category?.toLowerCase() === category.toLowerCase())
+    //     : products;
 
     return (
         <div className='main py-[10px]'>
@@ -72,7 +70,8 @@ const Trenditem = ({ category }) => {
                             <SwiperSlide key={index}>
                                 <Trendprop
                                     id={product.id}
-                                    image={product.image}
+                                    // image={product.image}
+                                    image={product.img}
                                     img2={product.img2}
                                     name={product.name}
                                     price={product.price}

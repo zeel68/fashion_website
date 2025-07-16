@@ -8,15 +8,23 @@ import 'swiper/css/navigation';
 import { FreeMode, Navigation } from 'swiper/modules';
 import { useContext } from 'react';
 import { ProductContext } from '../Context';
-
+import SareesDetails from '../Sarees/Sareedetails';
+import Trendprop from '../Menstrend/trendprop';
 
 const Homeoffer = ({ category }) => {
 
     const { products } = useContext(ProductContext);
 
+    // const filteredProducts = category
+    //     ? products.filter(p => p.category?.toLowerCase() === category.toLowerCase())
+    //     : products;
     const filteredProducts = category
-        ? products.filter(p => p.category?.toLowerCase() === category.toLowerCase())
-        : products;
+        ? SareesDetails.filter(
+            (product) =>
+                product.category &&
+                product.category.toLowerCase() === category.toLowerCase()
+        )
+        : SareesDetails;
     return (
         <>
             <div className='main py-[15px]'>
@@ -66,12 +74,12 @@ const Homeoffer = ({ category }) => {
                                 <SwiperSlide key={index}>
                                     <Trendprop
                                         id={product.id}
-                                        image={product.image}
-                                        // img2={product.img2}
-                                        // name={product.name}
-                                        // price={product.price}
-                                        // oldprice={product.oldprice}
-                                        // delivery={product.delivery}
+                                        image={product.img}
+                                    // img2={product.img2}
+                                    // name={product.name}
+                                    // price={product.price}
+                                    // oldprice={product.oldprice}
+                                    // delivery={product.delivery}
                                     />
                                 </SwiperSlide>
                             ))}

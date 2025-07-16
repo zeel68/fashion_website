@@ -5,7 +5,7 @@ import {
   FaInstagram, FaPinterest, FaTruckFast, FaWhatsapp
 } from "react-icons/fa6";
 import { MdDeliveryDining, MdOutlineSecurity } from "react-icons/md";
-// import SareesDetails from '../Sarees/Sareedetails';
+import SareesDetails from '../Sarees/Sareedetails';
 import { ProductContext } from '../Context';
 
 const ProductTopRight = () => {
@@ -13,15 +13,15 @@ const ProductTopRight = () => {
   const { products } = useContext(ProductContext);
 
   const { id } = useParams();
-  const product = products.find(item => item.id === parseInt(id));
+  const product = SareesDetails.find(item => item.id === parseInt(id));
 
   if (!product) {
     return <div className="text-red-600 font-bold">Product not found</div>;
   }
 
-
   return (
     <div className="w-[33%] pt-[2px]">
+
       <div className="block">
         <span className='text-[20px] font-bold'>{product.name}</span>
       </div>
