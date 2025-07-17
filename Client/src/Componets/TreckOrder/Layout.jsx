@@ -6,6 +6,7 @@ function Layout() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
+      <>
         <div className="sm:p-6 max-w-screen-xxl  mx-auto">
             <div className="flex text-[18px] bg-[#f3f3f3] rounded shadow-sm">
                 {/* <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} /> */}
@@ -19,6 +20,7 @@ function Layout() {
                 </div>
             </div>
         </div>
+      </>
     );
 }
 

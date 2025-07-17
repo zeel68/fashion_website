@@ -7,17 +7,17 @@ const Profile = () => {
                 <div className="bg-[#f3f3f3] p-2 w-[70%]">
 
                     {/* Contact Information */}
-                    <div>
+                    <div className='mb-4'>
                         <h2 className="text-lg font-semibold mb-2">Contact Information</h2>
-                        <div className="bg-white p-6 rounded shadow border space-y-4">
+                        <div className="bg-white p-6 rounded shadow space-y-4">
                             <input
                                 type="email"
                                 placeholder="aesvi2003@gmail.com"
-                                className="w-full border p-2 rounded"
+                                className="w-full border p-2 rounded text-sm"
                             />
 
                             <div className="flex gap-4">
-                                <select className="w-1/3 border p-2 rounded text-gray-500">
+                                <select className="w-1/3 border p-2 rounded text-gray-500 text-sm">
                                     <option>+91</option>
                                     <option>+1</option>
                                     <option>+44</option>
@@ -25,11 +25,11 @@ const Profile = () => {
                                 <input
                                     type="tel"
                                     placeholder="Phone Number"
-                                    className="w-2/3 border p-2 rounded focus:outline-none"
+                                    className="w-2/3 border p-2 rounded focus:outline-none text-sm"
                                 />
                             </div>
 
-                            <button className="w-full bg-[#d3b951] text-white py-1 rounded hover:bg-yellow-700 transition">
+                            <button className="w-full bg-[#d3b951] text-sm text-white py-1 rounded hover:bg-yellow-700 transition">
                                 EDIT
                             </button>
                         </div>
@@ -38,7 +38,7 @@ const Profile = () => {
                     {/* Primary Information */}
                     <div>
                         <h2 className="text-lg font-semibold mb-2">Primary Information</h2>
-                        <div className="bg-white p-6 rounded shadow border space-y-3">
+                        <div className="bg-white p-6 rounded shadow  space-y-3 text-sm">
 
                             <div className="flex justify-between">
                                 <label className="text-gray-600">First Name</label>
