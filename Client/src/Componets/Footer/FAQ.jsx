@@ -147,6 +147,13 @@ const FAQ = () => {
                     ]
                 }
             ]
+        }, {
+            question: 'I am not able to use the filter on your website.',
+            type: 'text',
+
+            answer:
+                'Please note, there are additional currency rate charges levied by your bank on your credit/debit card in case you are making the payment in INR or any other foreign currency apart from your originated currency. These charges are non-refundable. ',
+
         }
 
 
@@ -182,7 +189,7 @@ const FAQ = () => {
                                         {item.type === 'text' ? (
                                             <p className='text-[18px] tracking-wider text-[#121212B2] font-medium'>{item.answer}</p>
                                         ) : (
-                                            <img src={item.answer} alt="FAQ Answer" className="w-full max-w-[84px] h-[54px] rounded shadow" />
+                                            <img src={item.answer} alt="FAQ Answer" className="w-full max-w-[50%] h-[50%] rounded shadow" />
                                         )}
                                     </div>
                                 )}

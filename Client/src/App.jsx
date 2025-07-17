@@ -42,6 +42,7 @@ import Landing from './pages/landing';
 import Privacypolicy from './Componets/Footer/Privacypolicy';
 import Terms from './Componets/Footer/Terms';
 import Return from './Componets/Footer/Return';
+import FAQ from './Componets/Footer/FAQ';
 
 
 function App() {
@@ -93,7 +94,7 @@ function App() {
           <Route path='/privacyPolicy' element={<Privacypolicy />} />
           <Route path='/T&C' element={<Terms />} />
           <Route path='/Returnandexchange' element={<Return />} />
-
+          <Route path='/FAQs' element={<FAQ />} />
 
         </Routes>
         <Footer />

@@ -64,7 +64,7 @@ const Footer = ({ items }) => {
                                     <li><a href="#" className="hover:underline">Responsible Disclosure Policy</a></li>
                                 </ul>
                                 <ul className='px-[10px]'>
-                                    <li><a href="#" className="hover:underline">FAQs</a></li>
+                                    <li className="hover:underline"> <Link to="/FAQs">FAQs</Link></li>
                                     <li><a href="#" className="hover:underline">Cancellation policy</a></li>
                                     <li><a href="#" className="hover:underline">Shipping Policy</a></li>
                                     <li><a href="#" className="hover:underline">Ordering & Payment</a></li>
