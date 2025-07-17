@@ -5,6 +5,7 @@ import { FiInstagram } from "react-icons/fi";
 import { FaYoutube } from "react-icons/fa";
 import { FaPinterestP } from "react-icons/fa";
 import Footerprop from './Footerprop';
+import { Link } from 'react-router-dom';
 
 const Footer = ({ items }) => {
 
@@ -56,9 +57,9 @@ const Footer = ({ items }) => {
                                 <ul className='px-[10px]'>
                                     <li><a href="#" className="hover:underline">International FAQs</a></li>
                                     <li><a href="#" className="hover:underline">Order Status</a></li>
-                                    <li><a href="#" className="hover:underline">Returns & Exchange</a></li>
-                                    <li><a href="#" className="hover:underline">Terms And Conditions</a></li>
-                                    <li><a href="#" className="hover:underline">Privacy Policy</a></li>
+                                    <li className="hover:underline"><Link to="/Returnandexchange">Returns & Exchange</Link> </li>
+                                    <li className="hover:underline"><Link to="/T&C">Terms And Conditions</Link> </li>
+                                    <li className="hover:underline"> <Link to="/privacyPolicy">Privacy Policy</Link></li>
                                     <li><a href="#" className="hover:underline">Investor Relations</a></li>
                                     <li><a href="#" className="hover:underline">Responsible Disclosure Policy</a></li>
                                 </ul>

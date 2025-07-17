@@ -39,6 +39,9 @@ import Vouchers from './Componets/TreckOrder/Vouchers';
 import Address from './Componets/TreckOrder/Address';
 import Contact from './Componets/TreckOrder/Contact';
 import Landing from './pages/landing';
+import Privacypolicy from './Componets/Footer/Privacypolicy';
+import Terms from './Componets/Footer/Terms';
+import Return from './Componets/Footer/Return';
 
 
 function App() {
@@ -73,7 +76,6 @@ function App() {
           <Route path='/customerstories' element={<Customerstories category={'customerstories'} />} />
 
           <Route path='/WeddingGuide' element={<WeddingGuide />} />
-
           <Route path="/treckorder" element={<Layout />}>
             <Route path='/treckorder/profile' element={<Profile />} />
             <Route path='/treckorder/orders' element={<Orders />} />
@@ -84,10 +86,14 @@ function App() {
             <Route path='/treckorder/contactus' element={<Contact />} />
             {/* <Route path='/treckorder/logout' element={<Profile />} /> */}
           </Route>
-
           <Route path='/Wholesale' element={<Wholesale />} />
           <Route path='/Affiliate' element={<Affiliate />} />
           <Route path='/storelocatore' element={<Storelocator />} />
+
+          <Route path='/privacyPolicy' element={<Privacypolicy />} />
+          <Route path='/T&C' element={<Terms />} />
+          <Route path='/Returnandexchange' element={<Return />} />
+
 
         </Routes>
         <Footer />

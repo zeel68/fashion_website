@@ -80,7 +80,7 @@ const Sareesitem = ({ category }) => {
     //     ? products.filter(p => p.category?.toLowerCase() === category.toLowerCase())
     //     : products;
 
-    // const path = [{ name: "Home", link: "/" }]
+    const path = [{ name: "Home", link: "/" }]
 
     return (
         <div className='main py-[10px]'>
@@ -95,10 +95,10 @@ const Sareesitem = ({ category }) => {
 
                     {/* main section*/}
                     <div className="left w-[80%] px-[5px]">
-                        {/* 
+                        
                         <div className="breadcrum">
                             <Breadcrum path={path} current={category} />
-                        </div> */}
+                        </div>
                         {/* cat-collection Drop down */}
 
                         <div className="flex flex-wrap">
