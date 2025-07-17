@@ -35,7 +35,7 @@ const Navbar = ({ category }) => {
                 </div>
 
                 <div className="border-b border-b-[#ccc]">
-                    <div className=" px-4 sm:px-6 lg:px-8">
+                    <div className=" px-4 sm:px-6 lg:px-8 ">
 
                         <div className="w-full flex justify-center relative">
                             <Link to={'/'} className='px-[50px]'><img src="/assets/img/dhaneri.png" className='object-center object-cover w-[70px] ' alt="Site Logo" /></Link>
@@ -79,9 +79,9 @@ const Navbar = ({ category }) => {
                 <div className=" px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-wrap items-center my-[10px] justify-between">
                         <div className="flex flex-wrap m-[-15px]">
-                            <ul className='flex flex-wrap'>
+                            <ul className='flex flex-wrap relative'>
                                 {Nav.map((category, index) => (
-                                    <div key={index} className='relative' onMouseEnter={() => { setactive(category); setmenu(true); }} onMouseLeave={() => setmenu(false)} >
+                                    <div key={index} className='' onMouseEnter={() => { setactive(category); setmenu(true); }} onMouseLeave={() => setmenu(false)} >
                                         <li className='flex items-center hover:bg-[#ccc] hover:text-black'>
                                             <Link
                                                 to={`/${category.toLowerCase().replace(/\s+/g, "-")}`}
@@ -93,7 +93,7 @@ const Navbar = ({ category }) => {
 
                                         {/* Mega Menu */}
                                         {menu && active === category && (
-                                            <div className="fixed top-[130px] h-[450px] left-5 right-0 w-[96%] bg-white z-50">
+                                            <div className="absolute top-[45px] h-[450px] left-5 right-0 w-[1300px] bg-white z-50">
                                                 <div className="absolute top-0 left-0 w-full px-4 flex bg-white border-t border-t-[#ccc] z-50">
 
                                                     {/* firstpart */}

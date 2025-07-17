@@ -485,6 +485,28 @@ const SareesDetails = [
         delivery: "10 Day Delivery | Returnable",
         category: "Testimonialprop"
     },
+    // {
+    //     id: 49,
+    //     img: "/assets/img/saree2.jpg",
+    //     img2: "/assets/img/saree2-2.jpg",
+    //     name: "purpul Embroidered Poly Blend Saree Set",
+    //     price: "2500",
+    //     oldprice: "21000",
+    //     delivery: "10 Day Delivery | Returnable",
+    //     category: "sarees"
+
+    // },
+    {
+        id: 50,
+        img: "/assets/img/saree2.jpg",
+        img2: "/assets/img/saree2-2.jpg",
+        name: "purpul Embroidered Poly Blend Saree Set",
+        price: "2500",
+        oldprice: "21000",
+        delivery: "10 Day Delivery | Returnable",
+        category: "sarees"
+
+    },
 
 ];
 
