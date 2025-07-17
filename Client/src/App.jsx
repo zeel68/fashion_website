@@ -43,6 +43,7 @@ import Privacypolicy from './Componets/Footer/Privacypolicy';
 import Terms from './Componets/Footer/Terms';
 import Return from './Componets/Footer/Return';
 import FAQ from './Componets/Footer/FAQ';
+import Status from './Componets/Footer/Status';
 
 
 function App() {
@@ -95,6 +96,8 @@ function App() {
           <Route path='/T&C' element={<Terms />} />
           <Route path='/Returnandexchange' element={<Return />} />
           <Route path='/FAQs' element={<FAQ />} />
+          <Route path='/status' element={<Status />} />
+
 
         </Routes>
         <Footer />

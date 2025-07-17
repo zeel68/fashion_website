@@ -34,45 +34,59 @@ const Navbar = ({ category }) => {
                     <p>THURSDAY TO SUNSLAY – LAST DAY | UP TO 60% OFF</p>
                 </div>
 
-                <div className="border-b border-b-[#ccc]">
-                    <div className=" px-4 sm:px-6 lg:px-8 ">
+                <div className="border-b border-b-[#ccc] relative">
+                    <div className="px-4 sm:px-6 lg:px-8 relative h-[80px] flex items-center justify-center">
 
-                        <div className="w-full flex justify-center relative">
-                            <Link to={'/'} className='px-[50px]'><img src="/assets/img/dhaneri.png" className='object-center object-cover w-[70px] ' alt="Site Logo" /></Link>
-                        </div>
+                        {/* logo */}
+                        <Link to="/" className="absolute left-1/2 transform -translate-x-1/2">
+                            <img src="/assets/img/dhaneri.png" alt="Site Logo" className="w-[70px] object-cover object-center" />
+                        </Link>
 
-                        <div className=" h-[60px] w-full flex items-center justify-end mb-[10px] absolute top-9 left-2">
+                        {/* Right-side hader*/}
+                        <div className="absolute right-4 justify-center flex items-center">
+                            <ul className="flex flex-wrap text-[11px] items-center">
+                                <li><Link to="/WeddingGuide" className="px-2 text-red-700">Wedding Guide 2025</Link><span className="text-[#ccc]">|</span></li>
+                                <li><Link to="/treckorder" className="px-2">Track Order</Link><span className="text-[#ccc]">|</span></li>
+                                <li><Link to="/Wholesale" className="px-2">Wholesale</Link><span className="text-[#ccc]">|</span></li>
+                                <li><Link to="/Affiliate" className="px-2 text-red-700">Affiliate</Link><span className="text-[#ccc]">|</span></li>
+                                <li><Link to="/storelocatore" className="px-2">Store Locator</Link><span className="text-[#ccc]">|</span></li>
 
-                            <ul className='flex flex-wrap mx-5 text-[11px]'>
-                                <li><Link to={'/WeddingGuide'} className='px-2 text-red-700'>Wedding Guide 2025</Link><span className="text-[#ccc]">|</span></li>
-                                <li><Link to={'/treckorder'} className='px-2'>Track Order</Link><span className="text-[#ccc]">|</span></li>
-                                <li><Link to={'/Wholesale'} className='px-2'>Wholesale</Link><span className="text-[#ccc]">|</span></li>
-                                <li><Link to={'/Affiliate'} className='px-2 text-red-700'>Affiliate</Link><span className="text-[#ccc]">|</span></li>
-                                <li><Link to={'/storelocatore'} className='px-2'>Store Locator</Link><span className="text-[#ccc]">|</span></li>
-
-                                {/* login-logout */}
-                                {localStorage.getItem('auth-token')
-                                    ? <button onClick={() => { localStorage.removeItem('auth-token'); window.location.replace("/") }}>Logout</button> :
-                                    <li><Link onClick={() => setShowLogin(true)} className='px-2'>Login</Link><span className="text-[#ccc]">|</span></li>}
+                                {/* Login / Logout */}
+                                {localStorage.getItem('auth-token') ? (
+                                    <li>
+                                        <button onClick={() => { localStorage.removeItem('auth-token'); window.location.replace("/") }} className="px-2">Logout</button>
+                                        <span className="text-[#ccc]">|</span>
+                                    </li>
+                                ) : (
+                                    <li>
+                                        <button onClick={() => setShowLogin(true)} className="px-2">Login</button>
+                                        <span className="text-[#ccc]">|</span>
+                                    </li>
+                                )}
 
                                 <li>
-                                    <button onClick={() => setShowLogin(true)} className='px-2'>Signin</button>
+                                    <button onClick={() => setShowLogin(true)} className="px-2">Signin</button>
                                     <span className="text-[#ccc]">|</span>
                                 </li>
 
-                                {/* addtocart */}
-                                <li><Link to={'/cart'} className='relative px-2 flex flex-wrap align-middle justify-center'><IoCartOutline size={20} />
-                                    {totalCartItems > 0 && (
-                                        <span className="absolute -top-1 -right-0 bg-[#d4b952] text-white text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">
-                                            {totalCartItems}
-                                        </span>
-                                    )}
-                                </Link></li>
+                                {/* Cart Icon */}
+                                <li>
+                                    <Link to="/cart" className="relative px-2 flex items-center justify-center">
+                                        <IoCartOutline size={20} />
+                                        {totalCartItems > 0 && (
+                                            <span className="absolute -top-1 -right-1 bg-[#d4b952] text-white text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                                                {totalCartItems}
+                                            </span>
+                                        )}
+                                    </Link>
+                                </li>
                             </ul>
-                            {/* pop-pop */}
-                            {showLogin && <Login onClose={() => setShowLogin(false)} />}
                         </div>
                     </div>
+
+                    {/* Login Popup */}
+                    {showLogin && <Login onClose={() => setShowLogin(false)} />}
+
                 </div>
 
                 {/* mega menu*/}

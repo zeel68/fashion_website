@@ -56,7 +56,7 @@ const Footer = ({ items }) => {
                             <div className="flex justify-center">
                                 <ul className='px-[10px]'>
                                     <li><a href="#" className="hover:underline">International FAQs</a></li>
-                                    <li><a href="#" className="hover:underline">Order Status</a></li>
+                                    <li className="hover:underline"><Link to="/status">Order Status</Link> </li>
                                     <li className="hover:underline"><Link to="/Returnandexchange">Returns & Exchange</Link> </li>
                                     <li className="hover:underline"><Link to="/T&C">Terms And Conditions</Link> </li>
                                     <li className="hover:underline"> <Link to="/privacyPolicy">Privacy Policy</Link></li>

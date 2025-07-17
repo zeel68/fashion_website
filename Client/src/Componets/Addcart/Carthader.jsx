@@ -8,10 +8,10 @@ const Carthader = () => {
     return (
         <>
             <div className="block bg-[#f4f4f4] mb-10">
-                <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-xxl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-wrap align-middle justify-between">
                         <div className="flex flex-wrap justify-end items-center">
-                            <Link to="/"><img src="/assets/img/logo.png" className='object-center object-cover w-[60px]' alt="Site Logo" /></Link>
+                            <Link to="/"><img src="/assets/img/dhaneri.png" className='object-center object-cover w-[70px]' alt="Site Logo" /></Link>
                         </div>
                         <ul className='flex flex-wrap text-center'>
                             <li className='flex items-center justify-center text-center mx-2 my-2'>
