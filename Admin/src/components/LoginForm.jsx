@@ -1,38 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { login, register } from '../actions/authActions';
+// import { login, register } from '../actions/authActions';
 import { Link, useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import { FaArrowRight } from "react-icons/fa";
+import store from '../store/store';
 
 const Login = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { error, user, registered } = useSelector((state) => state.auth);
+  const { error, user, registered, login, register } = store();
 
   const [isLogin, setIsLogin] = useState(true);
-  const [formData, setFormData] = useState({ username: '', email: '', password: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', password: '', phone_number: '', store_id: '6874da6ef34b88733c0b452c' });
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (isLogin) {
-      dispatch(login({ email: formData.email, password: formData.password }));
+      await login({ email: formData.email, password: formData.password });
     } else {
-      dispatch(register(formData));
+      await register(formData);
     }
   };
-
+  
   useEffect(() => {
+    console.log(error);
+
     if (user) navigate('/home');
   }, [user, navigate]);
 
   useEffect(() => {
     if (registered) {
       setIsLogin(true);
-      setFormData({ username: '', email: '', password: '' });
+      setFormData({ name: '', email: '', password: '', phone_number: '' });
     }
   }, [registered]);
 
@@ -44,7 +46,7 @@ const Login = () => {
       <div className="w-full flex justify-center items-center p-[15px]  h-screen sm:p-[15px] sm:h-[100dvh]">
         <div className="md:w-1/2  p-[10px] w-[400px]">
 
-          <h2 className='text-2xl font-semibold'>{isLogin ? 'Login' : 'Register'}</h2>
+          <h2 className='text-2xl mb-[10px] font-semibold'>{isLogin ? 'Login' : 'Register'}</h2>
           {/* register page */}
           {!isLogin && (
             <div className="google py-[10px]">
@@ -71,17 +73,16 @@ const Login = () => {
             <h2>OR</h2>
           )}
 
-          {isLogin && (
-            <p className="text-sm text-[#70706E] cursor-pointer mb-[10px] hover:text-[#003B5A]">
-              <Link to="/password"> Forgot your password?</Link></p>
-          )}
+
 
           {error && <p style={{ color: 'red' }}>{error}</p>}
           <form onSubmit={handleSubmit} className="space-y-3">
             {!isLogin && (
               <div className="username pt-[10px]">
                 <label>Your Name</label>
-                <input className="w-full px-[10px] py-[5px] border border-[#D7D7D7] rounded my-[5px] outline" name="username" placeholder="Username" value={formData.username} onChange={handleChange} required />
+                <input className="w-full px-[10px] py-[5px] border border-[#D7D7D7] rounded my-[5px] outline" name="name" placeholder="Username" value={formData.name} onChange={handleChange} required />
+                <label>Your Phone</label>
+                <input className="w-full px-[10px] py-[5px] border border-[#D7D7D7] rounded my-[5px] outline" name="phone_number" placeholder="phone_number" value={formData.phone_number} onChange={handleChange} required />
               </div>
             )}
             {!isLogin && (
@@ -133,7 +134,7 @@ const Login = () => {
                   console.log("Google User:", decoded);
 
                   localStorage.setItem('user', JSON.stringify(decoded));
-                  localStorage.setItem('username', decoded.name);
+                  localStorage.setItem('name', decoded.name);
                   localStorage.setItem('email', decoded.email);
 
                   navigate('/home');
@@ -143,6 +144,11 @@ const Login = () => {
                 }}
               />
             </div>
+          )}
+
+          {isLogin && (
+            <p className="text-sm text-[#70706E] cursor-pointer mb-[10px] hover:text-[#003B5A]">
+              <Link to="/forgotpass"> Forgot your password?</Link></p>
           )}
 
           {isLogin && (
