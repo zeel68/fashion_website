@@ -3,7 +3,7 @@ import Sareeprop, { Product } from './Sareeprop'
 import { IoMdArrowDropdown } from 'react-icons/io';
 import Breadcrum from '../Breadcrum/Breadcrum';
 import { ProductContext } from '../Context';
-import SareesDetails from './Sareedetails';
+// import SareesDetails from './Sareedetails';
 
 const filters = {
     Categories: [
@@ -61,21 +61,20 @@ const filters = {
 
 const Sareesitem = ({ category }) => {
 
-    // const { SareesDetails } = useContext(ProductContext);
-
-    // const { products } = useContext(ProductContext);
-    // if (!products) return (null)
+    const { products } = useContext(ProductContext);
+    if (!products) return <p>Loading products...</p>;
 
     // const filtered = products.filter(item => item.category === category);
+
+    const filtered = products.filter(item =>
+        item.name?.toLowerCase().includes(category?.toLowerCase())
+    );
+    console.log("Filtered Products: ", filtered);
 
     const [dropdown, setDropdown] = useState(false);
     const [selected, setSelected] = useState("Relevance");
     const options = ["Relevance", "New Arrivals", "Price: Low to High", "Price: High to Low", "Best Sellers"];
 
-    const filteredProducts = category
-        ? SareesDetails.filter((product) => product.category && product.category.toLowerCase() === category.toLowerCase())
-        : SareesDetails;
-        
     // const filteredProducts = category
     //     ? products.filter(p => p.category?.toLowerCase() === category.toLowerCase())
     //     : products;
@@ -95,7 +94,7 @@ const Sareesitem = ({ category }) => {
 
                     {/* main section*/}
                     <div className="left w-[80%] px-[5px]">
-                        
+
                         <div className="breadcrum">
                             <Breadcrum path={path} current={category} />
                         </div>
@@ -136,18 +135,27 @@ const Sareesitem = ({ category }) => {
                         <div className="py-[15px]">
 
                             <div className="flex flex-wrap gap-4">
-                                {filteredProducts.map((product, index) => (
+                                {filtered.map((product, index) => (
                                     <Product
                                         key={index}
                                         id={product.id}
-                                        // image={product.image}
-                                        image={product.img}
+                                        images={product.images}
                                         img2={product.img2}
                                         name={product.name}
                                         price={product.price}
                                         oldprice={product.oldprice}
                                         delivery={product.delivery}
                                     />
+                                    // <Product
+                                    //     key={product._id}
+                                    //     id={product._id}
+                                    //     images={product.images}
+                                    //     name={product.name}
+                                    //     price={product.price}
+                                    //     oldprice={product.oldprice}
+                                    //     delivery={product.delivery}
+                                    // />
+
                                 ))}
 
                             </div>

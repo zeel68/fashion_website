@@ -66,7 +66,7 @@ function App() {
           <Route path='/Women_clothing' element={<Women />} />
           <Route path='/KurtaSet' element={<KurtaSet />} />
           <Route path='/SalwarKameez' element={<SalwarKameez />} />
-          <Route path='/Lehengas' element={<Lehengas />} />
+          <Route path='/Shirts' element={<Lehengas />} />
           <Route path='/Mens' element={<Mens />} />
           <Route path='/Kids' element={<Kids />} />
           <Route path='/Jewellery' element={<Jewellery />} />

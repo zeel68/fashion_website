@@ -6,7 +6,6 @@ import { useContext } from 'react';
 import { ProductContext } from '../Context';
 import { Link } from "react-router-dom";
 
-
 const Testimonial = ({ category }) => {
     // const filteredProducts = category
     //     ? SareesDetails.filter((product) =>
@@ -14,9 +13,10 @@ const Testimonial = ({ category }) => {
     //         product.category.toLowerCase() === category.toLowerCase()
     //     )
     //     : SareesDetails;
+    
     const { products } = useContext(ProductContext);
     const filteredProducts = category
-        ? products.filter(p => p.category?.toLowerCase() === category.toLowerCase())
+        ? products.filter(p => p.category.toLowerCase() === category.toLowerCase())
         : products;
 
     return (

@@ -2,6 +2,9 @@ import React, { createContext, useState, useEffect } from 'react';
 
 export const ProductContext = createContext(null);
 
+// 65.1.3.198:5050/api
+// Store Id:- 6874da6ef34b88733c0b452c
+
 // Default empty cart for 300 items
 const getDefaultCart = () => {
   let cart = {};
@@ -16,21 +19,22 @@ const ContextProvider = ({ children }) => {
   const [cartItem, setCartItem] = useState(getDefaultCart);
   const [token, setToken] = useState(localStorage.getItem("token") || "");
 
-
   // Fetch product data from backend
+
   useEffect(() => {
-    fetch('http://localhost:4040/allproduct')
+    fetch('http://65.1.3.198:5050/api/storefront/store/6874da6ef34b88733c0b452c/products?page=1&limit=12&sort=created_at&order=desc')
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data);
-        console.log("Fetched Products: ", data);
+        // console.log("Fetched Products: ", data);
+        setProducts(data.data.products);
       })
       .catch((err) => {
         console.error("Failed to fetch products:", err);
       });
 
     if (localStorage.getItem('auth-token')) {
-      fetch('http://localhost:4040/getcart', {
+      // http://localhost:4040/getcart
+      fetch('http://65.1.3.198:5050/api/storefront/store/6874da6ef34b88733c0b452c/car', {
         method: 'POST',
         headers: {
           Accept: 'application/form-data',
@@ -39,9 +43,11 @@ const ContextProvider = ({ children }) => {
         },
         body: "",
       }).then((response) => response.json())
-        .then((data) => setCartItem(data));
+        .then((data) => {
+          console.log("Cart Response:", data);
+          setCartItem(data)
+        });
     }
-
   }, []);
 
   useEffect(() => {

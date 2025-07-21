@@ -2,14 +2,19 @@ import React, { useState } from 'react';
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
+import axios from 'axios';
+import Store from '../LoginApi/store/store';
 
 const Login = ({ onClose }) => {
+    // const { setUser, setToken } = Store();
 
     const [state, setstate] = useState("Login");
     const [formData, setFormdata] = useState({
-        username: "",
+        name: "",
         email: "",
-        password: ""
+        password: "",
+        phone_number: "",
+        store_id: '6874da6ef34b88733c0b452c'
     });
 
     const changeHandaler = (e) => {
@@ -18,48 +23,67 @@ const Login = ({ onClose }) => {
 
     const login = async () => {
         console.log("login ", formData);
-        let responseData;
-        await fetch('http://localhost:4040/weblogin', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        }).then((response) => response.json()).then((data) => responseData = data);
+        try {
+            const response = await axios.post('http://65.1.3.198:5050/api/auth/login', formData,
+                {
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
 
-        if (responseData.success) {
-            localStorage.setItem('auth-token', responseData.token);
-            window.location.replace("/");
-        } else {
-            alert(responseData.errors);
+            if (response.data.success) {
+                localStorage.setItem('auth-token', response.data.token);
+
+                // setToken(response.data.token);
+                // setUser(response.data.user);
+
+                window.location.replace("/");
+            } else {
+                alert(response.data.errors || "Login failed");
+            }
+        } catch (error) {
+            console.error("Login error:", error.response?.data || error.message);
+            alert(error.response?.data?.message || "Login failed. Check your credentials.");
         }
     };
+
 
     const signup = async () => {
         console.log("signup ", formData);
-        let responseData;
-        await fetch('http://localhost:4040/signup', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        }).then((response) => response.json()).then((data) => responseData = data);
+        try {
+            const response = await axios.post('http://65.1.3.198:5050/api/auth/register', formData,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                    },
+                }
+            );
 
-        if (responseData.success) {
-            alert("Signup successful! Please login now.");
-            setstate("Login"); // Switch to login screen
-            setFormdata({
-                username: "",
-                email: "",
-                password: ""
-            });
-        } else {
-            alert(responseData.errors);
+            console.log("Signup response:", response.data);
+
+            if (response.data.success) {
+                alert("Signup successful! Please login now.");
+                setstate("Login");
+                setFormdata({
+                    name: "",
+                    email: "",
+                    password: "",
+                    phone_number: "",
+                    store_id: '6874da6ef34b88733c0b452c'
+                });
+            } else {
+                alert(response.data.errors || response.data.message || "Signup failed");
+            }
+
+        } catch (error) {
+            console.error("Signup error:", error.response?.data || error.message);
+            alert(error.response?.data?.message || error.message || "Signup failed");
         }
     };
+
 
     return (
         <div className="fixed inset-0 bg-[rgba(0,0,0,0.8)] z-50 flex justify-center items-center">
@@ -76,14 +100,24 @@ const Login = ({ onClose }) => {
                 <p className='text-[14px] font-semibold pt-2'>for a quicker checkout</p>
 
                 {state.toLowerCase() === "signup" && (
-                    <input
-                        name='username'
-                        value={formData.username}
-                        onChange={changeHandaler}
-                        className='mt-2 text-[#6d6d6d] border border-[#ececec] w-full mb-3 p-2 outline-none rounded-md'
-                        type="text"
-                        placeholder="Enter name"
-                    />
+                    <div className="div">
+                        <input
+                            name='name'
+                            value={formData.name}
+                            onChange={changeHandaler}
+                            className='mt-2 text-[#6d6d6d] border border-[#ececec] w-full mb-3 p-2 outline-none rounded-md'
+                            type="text"
+                            placeholder="Enter name"
+                        />
+                        <input
+                            name='phone_number'
+                            value={formData.phone_number}
+                            onChange={changeHandaler}
+                            className='mt-2 text-[#6d6d6d] border border-[#ececec] w-full mb-3 p-2 outline-none rounded-md'
+                            type="text"
+                            placeholder="Enter Phone number"
+                        />
+                    </div>
                 )}
 
                 <input
@@ -135,12 +169,13 @@ const Login = ({ onClose }) => {
                             console.log("Google User:", decoded);
 
                             localStorage.setItem('user', JSON.stringify(decoded));
-                            localStorage.setItem('username', decoded.name);
+                            localStorage.setItem('name', decoded.name);
                             localStorage.setItem('email', decoded.email);
 
-                            onClose(); // Close modal
+                            onClose();
                             window.location.replace("/");
                         }}
+
                         onError={() => {
                             console.log('Google Login Failed');
                         }}

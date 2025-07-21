@@ -8,12 +8,16 @@ import { ProductContext } from './Context';
 import Login from './Login';
 
 const Navbar = ({ category }) => {
-    const Nav = ["Category", "Women_clothing", "KurtaSet", "SalwarKameez", "Lehengas", "Sarees", "Mens", "Kids", "Jewellery", "Blouses", "Dupattas", "Festivals", "Home_Living"];
+    const Nav = ["Category", "Women_clothing", "KurtaSet", "SalwarKameez", "Shirts", "Sarees", "Mens", "Kids", "Jewellery", "Blouses", "Dupattas", "Festivals", "Home_Living"];
     const { products } = useContext(ProductContext);
     // const filtered = products.filter(item => item.category === category);
+    // const filteredProducts = category
+    //     ? products.filter(p => p.category?.toLowerCase() === category.toLowerCase())
+    //     : products;
+
     const filteredProducts = category
-        ? products.filter(p => p.category?.toLowerCase() === category.toLowerCase())
-        : products;
+        ? (products || []).filter(p => p.category?.toLowerCase() === category.toLowerCase())
+        : (products || []);
 
     const [active, setactive] = useState(Nav[0]);
     const [menu, setmenu] = useState(false);
@@ -24,7 +28,6 @@ const Navbar = ({ category }) => {
     // login pop-pop
     const [showLogin, setShowLogin] = useState(false);
     const [open, setOpen] = useState(false);
-
 
     return (
         <>

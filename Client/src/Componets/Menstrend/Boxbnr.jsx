@@ -11,6 +11,14 @@ import BoxbnrProps from './BoxbnrProps ';
 const Boxbnr = ({ category }) => {
     const { products } = useContext(ProductContext);
 
+    // const { products } = useContext(ProductContext);
+    // if (!products) return <p>Loading products...</p>;
+
+    // const filtered = products.filter(item =>
+    //     item.name?.toLowerCase().includes(category?.toLowerCase())
+    // );
+    // console.log("Filtered Products: ", filtered);
+
     const filteredProducts = category
         ? SareesDetails.filter(
             (product) =>
