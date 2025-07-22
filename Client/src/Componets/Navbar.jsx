@@ -9,25 +9,23 @@ import Login from './Login';
 
 const Navbar = ({ category }) => {
     const Nav = ["Category", "Women_clothing", "KurtaSet", "SalwarKameez", "Shirts", "Sarees", "Mens", "Kids", "Jewellery", "Blouses", "Dupattas", "Festivals", "Home_Living"];
-    const { products } = useContext(ProductContext);
+    const { products = [], cartItem } = useContext(ProductContext) || {};
     // const filtered = products.filter(item => item.category === category);
-    // const filteredProducts = category
-    //     ? products.filter(p => p.category?.toLowerCase() === category.toLowerCase())
-    //     : products;
-
     const filteredProducts = category
         ? (products || []).filter(p => p.category?.toLowerCase() === category.toLowerCase())
         : (products || []);
 
+
     const [active, setactive] = useState(Nav[0]);
     const [menu, setmenu] = useState(false);
 
-    const { cartItem } = useContext(ProductContext)
+    // const { cartItem } = useContext(ProductContext)
     const totalCartItems = Object.values(cartItem).reduce((sum, qty) => sum + qty, 0);
 
     // login pop-pop
     const [showLogin, setShowLogin] = useState(false);
     const [open, setOpen] = useState(false);
+
 
     return (
         <>
@@ -212,4 +210,3 @@ const Navbar = ({ category }) => {
 };
 
 export default Navbar;
-

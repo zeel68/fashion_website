@@ -13,8 +13,7 @@ import { FaChevronDown, FaChevronUp } from 'react-icons/fa6';
 import { ProductContext } from '../Context';
 
 const ProductBottom = ({ category }) => {
-    const { products } = useContext(ProductContext);
-    
+    const { products = [] } = useContext(ProductContext) || {};
     const filtered = products.filter(item => item.category === category);
 
     const prevRef = useRef(null);

@@ -138,7 +138,7 @@ const Sareesitem = ({ category }) => {
                                 {filtered.map((product, index) => (
                                     <Product
                                         key={index}
-                                        id={product.id}
+                                        id={product._id}
                                         images={product.images}
                                         img2={product.img2}
                                         name={product.name}

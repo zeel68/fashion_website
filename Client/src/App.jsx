@@ -44,6 +44,8 @@ import Terms from './Componets/Footer/Terms';
 import Return from './Componets/Footer/Return';
 import FAQ from './Componets/Footer/FAQ';
 import Status from './Componets/Footer/Status';
+import ForgotPassword from './Componets/Login/ForgotPassword';
+import VerifyEmail from './Componets/Login/VerifyEmail';
 
 
 function App() {
@@ -59,9 +61,10 @@ function App() {
 
           <Route path='/cart' element={<Addcart />} />
           <Route path='/placeorder' element={<PlaceOrder />} />
-          <Route path='/verify' element={<Verify />} />
+          {/* <Route path='/verify' element={<Verify />} /> */}
           <Route path='/myorder' element={<Myorder />} />
-
+          {/* <Route path="/forgotpass" element={<ForgotPassword />} /> */}
+          <Route path="/verifyemail" element={<VerifyEmail />} />
           <Route path='/Category' element={<Category />} />
           <Route path='/Women_clothing' element={<Women />} />
           <Route path='/KurtaSet' element={<KurtaSet />} />

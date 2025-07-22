@@ -1,27 +1,50 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { LuBadgePercent } from "react-icons/lu";
 import { GoGift } from "react-icons/go";
 import Carthader from './Carthader';
 import { ProductContext } from '../Context';
 import { FaMinus, FaPlus } from "react-icons/fa6";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Addcart = ({ category }) => {
-    const { cartItem, addTocart, removeTocart } = useContext(ProductContext);
+    const { cartItem, addTocart, removeTocart, fetchCartProducts, products } = useContext(ProductContext);
+    const navigate = useNavigate();
 
-    const { products } = useContext(ProductContext);
-    const filtered = products.filter(item => item.category === category);
 
-    const cartProducts = products.filter(product => cartItem[product.id] > 0);
+    const { id } = useParams();
+
+    const [product, setProduct] = useState(null);
+    const [error, setError] = useState(null);
+    const filtered = products.filter(item => item.name?.toLowerCase().includes(category?.toLowerCase()));
+
+    useEffect(() => {
+        const fetchFeatured = async () => {
+            try {
+                const response = await fetch(`http://65.1.3.198:5050/api/storefront/store/6874da6ef34b88733c0b452c/cart`);
+                const data = await response.json();
+                setProduct(data.data.product);
+                console.log("Products: ", data);
+            } catch (err) {
+                console.error("Failed to fetch product:", err);
+                setError("Failed to fetch product details.");
+            }
+        };
+
+        fetchFeatured();
+    }, [id]);
+
+    if (error) return <div className="text-black font-bold">{error}</div>;
+    if (!product) return <div className="text-black font-bold">Product not found</div>;
 
     const calculateTotal = () => {
-        return cartProducts.reduce((total, product) => {
-            return total + product.price * cartItem[product.id];
+        const total = cartProducts.reduce((sum, product) => {
+            const itemTotal = product.price * cartItem[product.id];
+            console.log(`Calculating item: ${product.name}, Qty: ${cartItem[product.id]}, Total: ${itemTotal}`);
+            return sum + itemTotal;
         }, 0);
+        return total;
     };
 
-    // place order
-    const navigate = useNavigate();
 
     return (
         <div className="main">
@@ -36,7 +59,7 @@ const Addcart = ({ category }) => {
                     <div className="w-[65%] p-3">
                         <h2 className="text-[20px] text-[#555] font-semibold mb-4">My Shopping Bag ({cartProducts.length})</h2>
 
-                        {cartProducts.map(product => (
+                        {filtered.map(product => (
                             <div key={product.id} className="flex border border-[#ececec] mb-4">
                                 <div className="p-4">
                                     <img src={product.image} alt={product.name} className="w-[110px] h-[120px] block" />

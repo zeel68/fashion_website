@@ -10,11 +10,10 @@ import { ProductContext } from '../Context';
 // import SareesDetails from '../Sarees/Sareedetails';
 
 const AlsoLike = ({ category }) => {
-      const { products } = useContext(ProductContext);
-    
+    const { products = [] } = useContext(ProductContext) || {};
     const filtered = products.filter(item => item.category === category);
 
-    
+
     const prevRef = useRef(null);
     const nextRef = useRef(null);
     const swiperRef = useRef(null);

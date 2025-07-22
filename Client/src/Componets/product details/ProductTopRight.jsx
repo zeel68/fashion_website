@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from "react-router-dom";
 import {
   FaChevronDown, FaChevronUp, FaEye, FaFacebookF, FaIndianRupeeSign,
@@ -10,14 +10,48 @@ import { ProductContext } from '../Context';
 
 const ProductTopRight = () => {
   const { addTocart } = useContext(ProductContext);
-  const { products } = useContext(ProductContext);
+  // const { products } = useContext(ProductContext);
 
+  // const { id } = useParams();
+  // const product = SareesDetails.find(item => item.id === parseInt(id));
+
+  // if (!product) {
+  //   return <div className="text-red-600 font-bold">Product not found</div>;
+  // }
   const { id } = useParams();
-  const product = SareesDetails.find(item => item.id === parseInt(id));
+  console.log("Product ID:", id);
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  if (!product) {
-    return <div className="text-red-600 font-bold">Product not found</div>;
-  }
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(`http://65.1.3.198:5050/api/storefront/store/6874da6ef34b88733c0b452c/products/6874da78f34b88733c0b473a`);
+        const data = await response.json();
+        console.log("Product data: ", data);
+
+        if (data.success === false || !data.data || !data.data.product) {
+          setError("Product not found");
+          setProduct(null);
+        } else {
+          setProduct(data.data.product);
+        }
+
+        setLoading(false);
+      } catch (err) {
+        console.error("Failed to fetch product:", err);
+        setError("Failed to fetch product details.");
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div className="text-black font-bold">{error}</div>;
+  if (!product) return <div className="text-black font-bold">Product not found</div>;
 
   return (
     <div className="w-[33%] pt-[2px]">
