@@ -14,7 +14,10 @@ import { ProductContext } from '../Context';
 
 const ProductBottom = ({ category }) => {
     const { products = [] } = useContext(ProductContext) || {};
-    const filtered = products.filter(item => item.category === category);
+    const filtered = products.filter(item =>
+        item.name?.toLowerCase().includes(category?.toLowerCase())
+    );
+    console.log("display Products: ", filtered);
 
     const prevRef = useRef(null);
     const nextRef = useRef(null);
@@ -46,7 +49,11 @@ const ProductBottom = ({ category }) => {
 
     return (
         <>
-
+            <div className="block">
+                <p>Add Review</p>
+                <input type="text" placeholder='Add Review' />
+                <button>ADD</button>
+            </div>
             {/* Description Section */}
             <div className="border-b border-b-[#dcdcdc] w-full">
                 <div className="cursor-pointer pt-4 pb-4 text-[17px] font-bold flex justify-between items-center" onClick={toggleMenu}>
@@ -147,9 +154,9 @@ const ProductBottom = ({ category }) => {
                         }}
                     >
                         {filtered.map((item) => (
-                            <SwiperSlide key={item.id}>
+                            <SwiperSlide key={item._id}>
                                 <SareeProps
-                                    id={item.id}
+                                    id={item._id}
                                     image={item.image}
                                     title={item.name}
                                     price={item.price}

@@ -59,7 +59,7 @@ export const Product = ({ images, name, price, oldprice, delivery, id }) => {
                             <img
                                 className="w-full transition-opacity duration-[400ms] ease-in-out group-hover:opacity-0"
                                 src={images}
-                                // alt="saree"
+                            // alt="saree"
                             />
                             {/* img 2 Hover */}
                             <img

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/free-mode';
@@ -9,6 +9,7 @@ import Trendprop from './trendprop';
 import { useContext } from 'react';
 import { ProductContext } from '../Context';
 import SareesDetails from '../Sarees/Sareedetails';
+import Aos from 'aos';
 
 const Trenditem = ({ category }) => {
 
@@ -22,9 +23,11 @@ const Trenditem = ({ category }) => {
     // const filteredProducts = category
     //     ? products.filter(p => p.category?.toLowerCase() === category.toLowerCase())
     //     : products;
-
+    useEffect(() => {
+        Aos.init({ duration: 1000 });
+    }, []);
     return (
-        <div className='main py-[10px]'>
+        <div className='main py-[10px]' data-aos="fade-up" data-aos-delay="100">
             <div className="max-w-screen-xxl mx-auto px-[5px]">
                 <div className="inner-main bg-[#fbfbfb]">
                     <style>

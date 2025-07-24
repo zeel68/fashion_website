@@ -1,31 +1,32 @@
-import React, { useContext, useState } from 'react'
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from 'react'
+import { data, Link } from "react-router-dom";
 import { FaAngleDown, FaAngleRight, FaIndianRupeeSign } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 // import { IoBagHandle } from "react-icons/io5";
 import { IoCartOutline } from "react-icons/io5";
 import { ProductContext } from './Context';
 import Login from './Login';
+import { CiHeart } from 'react-icons/ci';
 
 const Navbar = ({ category }) => {
     const Nav = ["Category", "Women_clothing", "KurtaSet", "SalwarKameez", "Shirts", "Sarees", "Mens", "Kids", "Jewellery", "Blouses", "Dupattas", "Festivals", "Home_Living"];
-    const { products = [], cartItem } = useContext(ProductContext) || {};
+    const { products = [], cartItem, wishItem } = useContext(ProductContext) || {};
     // const filtered = products.filter(item => item.category === category);
-    const filteredProducts = category
-        ? (products || []).filter(p => p.category?.toLowerCase() === category.toLowerCase())
-        : (products || []);
+    const filteredProducts = products.filter(item =>
+        item.name?.toLowerCase().includes(category?.toLowerCase())
+    );
 
 
     const [active, setactive] = useState(Nav[0]);
     const [menu, setmenu] = useState(false);
 
     // const { cartItem } = useContext(ProductContext)
-    const totalCartItems = Object.values(cartItem).reduce((sum, qty) => sum + qty, 0);
+    const totalCartItems = Object.values(cartItem || {}).reduce((sum, qty) => sum + qty, 0);
+    const totalwish = Object.values(wishItem || {}).reduce((sum, qty) => sum + qty, 0);
 
     // login pop-pop
     const [showLogin, setShowLogin] = useState(false);
     const [open, setOpen] = useState(false);
-
 
     return (
         <>
@@ -69,18 +70,29 @@ const Navbar = ({ category }) => {
                                     <button onClick={() => setShowLogin(true)} className="px-2">Signin</button>
                                     <span className="text-[#ccc]">|</span>
                                 </li>
-
+                                <li>
+                                    <Link to="/WishList" className="relative px-2 flex items-center justify-center">
+                                        <CiHeart size={20} />
+                                        {totalwish > 0 && (
+                                            <span className="absolute -top-1 -right-1 bg-red-700 text-white text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                                                {totalwish}
+                                            </span>
+                                        )}
+                                    </Link>
+                                </li>
                                 {/* Cart Icon */}
                                 <li>
                                     <Link to="/cart" className="relative px-2 flex items-center justify-center">
                                         <IoCartOutline size={20} />
                                         {totalCartItems > 0 && (
-                                            <span className="absolute -top-1 -right-1 bg-[#d4b952] text-white text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                                            <span className="absolute -top-1 -right-1 bg-red-700 text-white text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">
                                                 {totalCartItems}
                                             </span>
                                         )}
                                     </Link>
                                 </li>
+
+
                             </ul>
                         </div>
                     </div>

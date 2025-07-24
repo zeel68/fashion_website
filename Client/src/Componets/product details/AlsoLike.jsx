@@ -11,8 +11,10 @@ import { ProductContext } from '../Context';
 
 const AlsoLike = ({ category }) => {
     const { products = [] } = useContext(ProductContext) || {};
-    const filtered = products.filter(item => item.category === category);
-
+    const filtered = products.filter(item =>
+        item.name?.toLowerCase().includes(category?.toLowerCase())
+    );
+    console.log("New Arrival: ", filtered);
 
     const prevRef = useRef(null);
     const nextRef = useRef(null);
@@ -79,9 +81,9 @@ const AlsoLike = ({ category }) => {
                         }}
                     >
                         {filtered.map((item) => (
-                            <SwiperSlide key={item.id}>
+                            <SwiperSlide key={item._id}>
                                 <SareeProps
-                                    id={item.id}
+                                    id={item._id}
                                     image={item.image}
                                     title={item.name}
                                     price={item.price}

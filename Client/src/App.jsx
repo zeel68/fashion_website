@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import './index.css'
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
@@ -6,7 +6,6 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import SareesDisplay from './pages/SareesDisplay'
 import Footer from './Componets/Footer/Footer';
 import Navbar from './Componets/Navbar';
-import MainPage from './Componets/product details/MainPage';
 
 import Women from './Navbarpages/Women';
 import KurtaSet from './Navbarpages/KurtaSet';
@@ -46,8 +45,12 @@ import FAQ from './Componets/Footer/FAQ';
 import Status from './Componets/Footer/Status';
 import ForgotPassword from './Componets/Login/ForgotPassword';
 import VerifyEmail from './Componets/Login/VerifyEmail';
+import Productdetails from './Componets/product details/Productdetails';
+import WishList from './Componets/Addcart/WishList';
 
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import Reviews from './Componets/product details/Reviews';
 function App() {
 
   return (
@@ -57,9 +60,12 @@ function App() {
         <Routes>
           <Route path='/' element={<Landing />} />
           <Route path='/Sarees' element={<SareesDisplay />} />
-          <Route path='/saree/:id' element={<MainPage />} />
+          <Route path='/saree/:id' element={<Productdetails />} />
+          <Route path='/Reviews' element={<Reviews />} />
 
           <Route path='/cart' element={<Addcart />} />
+          <Route path='/WishList' element={<WishList />} />
+
           <Route path='/placeorder' element={<PlaceOrder />} />
           {/* <Route path='/verify' element={<Verify />} /> */}
           <Route path='/myorder' element={<Myorder />} />

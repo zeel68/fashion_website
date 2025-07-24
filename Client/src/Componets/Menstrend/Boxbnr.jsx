@@ -8,6 +8,7 @@ import { ProductContext } from '../Context';
 import SareesDetails from '../Sarees/Sareedetails';
 import BoxbnrProps from './BoxbnrProps ';
 import { useParams } from 'react-router-dom';
+import Aos from 'aos';
 
 const Boxbnr = ({ category }) => {
     const { id } = useParams();
@@ -35,8 +36,12 @@ const Boxbnr = ({ category }) => {
     }, [id]);
     if (error) return <div className="text-black font-bold">{error}</div>;
     if (!product) return <div className="text-black font-bold">Product not found</div>;
+
+    useEffect(() => {
+        Aos.init({ duration: 1000 });
+    }, []);
     return (
-        <div className="main pt-[15px] pb-[30px]">
+        <div className="main pt-[15px] pb-[30px]" data-aos="fade-up" data-aos-delay="100">
             <div className="max-w-screen-xxl px-[5px] mx-auto">
                 <div className="inner-main">
                     <div className="flex justify-center items-center p-[25px]">

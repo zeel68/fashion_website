@@ -1,50 +1,37 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { LuBadgePercent } from "react-icons/lu";
 import { GoGift } from "react-icons/go";
 import Carthader from './Carthader';
 import { ProductContext } from '../Context';
 import { FaMinus, FaPlus } from "react-icons/fa6";
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { RiDeleteBin5Fill } from 'react-icons/ri';
 
-const Addcart = ({ category }) => {
-    const { cartItem, addTocart, removeTocart, fetchCartProducts, products } = useContext(ProductContext);
+
+const Addcart = () => {
+    const { cartItem, clearcart, addTocart, removeTocart, products } = useContext(ProductContext);
     const navigate = useNavigate();
 
-
-    const { id } = useParams();
-
-    const [product, setProduct] = useState(null);
-    const [error, setError] = useState(null);
-    const filtered = products.filter(item => item.name?.toLowerCase().includes(category?.toLowerCase()));
-
-    useEffect(() => {
-        const fetchFeatured = async () => {
-            try {
-                const response = await fetch(`http://65.1.3.198:5050/api/storefront/store/6874da6ef34b88733c0b452c/cart`);
-                const data = await response.json();
-                setProduct(data.data.product);
-                console.log("Products: ", data);
-            } catch (err) {
-                console.error("Failed to fetch product:", err);
-                setError("Failed to fetch product details.");
-            }
-        };
-
-        fetchFeatured();
-    }, [id]);
-
-    if (error) return <div className="text-black font-bold">{error}</div>;
-    if (!product) return <div className="text-black font-bold">Product not found</div>;
+    const cartProducts = products.filter(product => cartItem[product._id] > 0);
 
     const calculateTotal = () => {
-        const total = cartProducts.reduce((sum, product) => {
-            const itemTotal = product.price * cartItem[product.id];
-            console.log(`Calculating item: ${product.name}, Qty: ${cartItem[product.id]}, Total: ${itemTotal}`);
+        return cartProducts.reduce((sum, product) => {
+            const qty = cartItem[product._id] || 0;
+            const itemTotal = product.price * qty;
             return sum + itemTotal;
-        }, 0);
-        return total;
+        }, 0).toFixed(2);
     };
 
+    if (cartProducts.length === 0) {
+        return (
+            <div className="main">
+                <Carthader />
+                <div className="max-w-screen-xxl mx-auto px-20">
+                    <h2 className="text-[20px] text-[#555] font-semibold mb-4">Your cart is empty.</h2>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="main">
@@ -59,41 +46,48 @@ const Addcart = ({ category }) => {
                     <div className="w-[65%] p-3">
                         <h2 className="text-[20px] text-[#555] font-semibold mb-4">My Shopping Bag ({cartProducts.length})</h2>
 
-                        {filtered.map(product => (
-                            <div key={product.id} className="flex border border-[#ececec] mb-4">
+                        {cartProducts.map(product => (
+                            <div key={product._id} className="flex border border-[#ececec] mb-4">
                                 <div className="p-4">
                                     <img src={product.image} alt={product.name} className="w-[110px] h-[120px] block" />
                                 </div>
 
                                 <div className="w-full p-4">
-                                    <div className="flex justify-between items-start ">
+                                    <div className="">
                                         <h3 className="text-[15px] font-normal hover:underline">{product.name}</h3>
                                         <div className="text-right flex">
-                                            <p className="text-[15px] text-[#555] pr-3">₹{product.price}</p>
-                                            <p className="line-through text-[15px] text-[#555]">₹{product.oldprice}</p>
+                                            <p className="text-[15px] text-[#555] pr-3">Price: ₹{product.price}</p>
+                                            {product.oldprice && (
+                                                <p className="line-through text-[15px] text-[#555]">₹{product.oldprice}</p>
+                                            )}
                                         </div>
                                     </div>
 
                                     <div className="flex text-sm text-gray-600 mb-1">
                                         <span className="pr-8">Size: Unstitched</span>
-                                        <span className="pr-8">Qty: {cartItem[product.id]}</span>
+                                        <span className="pr-8">Qty: {cartItem[product._id]}</span>
                                         <span>Color: {product.color || 'red'}</span>
                                     </div>
                                     <div className="text-sm text-gray-600 mb-3">SKU CODE : {product.sku || 'XSR30702U'}</div>
 
                                     <div className="flex gap-3">
                                         <p className=' text-sm text-gray-600'>Qty :</p>
-                                        <button
-                                            onClick={() => removeTocart(product.id)}
-                                            className="p-1 bg-gray-300 text-black"
-                                        ><FaMinus size={10} /></button>
-                                        <button
-                                            onClick={() => addTocart(product.id)}
-                                            className="p-1 bg-gray-300 text-black"
-                                        ><FaPlus size={10} /></button>
-                                    </div>
 
-                                    <a href="/" className="text-black text-[13px] underline cursor-pointer">Move to Wishlist</a>
+                                        <Link onClick={() => { console.log("remove to cart:", product); removeTocart(product._id); }} className="p-1 bg-gray-300 text-black">
+                                            <FaMinus size={10} />
+                                        </Link>
+                                        <Link onClick={() => { console.log("add to cart:", product); addTocart(product._id); }} className="p-1 bg-gray-300 text-black">
+                                            <FaPlus size={10} />
+                                        </Link>
+
+                                    </div>
+                                    <div className="flex flex-wrap justify-between pt-[10px]">
+                                        <a href="/" className="text-black text-[13px] underline cursor-pointer">Move to Wishlist</a>
+                                        <div className="pr-3">
+                                            <RiDeleteBin5Fill onClick={() => clearcart(product._id)} className="w-5 h-5 text-red-700 cursor-pointer hover:opacity-80 " />
+
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>

@@ -17,7 +17,7 @@ const Hero = () => {
 
         const fetchImages = async () => {
             try {
-                const res = await fetch('http://65.1.3.198:5050/api/storefront/store/6874da6ef34b88733c0b452c/hero');
+                const res = await fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/hero');
                 const data = await res.json();
                 console.log("Fetched hero data:", data);
                 setImages(data?.data || []);
