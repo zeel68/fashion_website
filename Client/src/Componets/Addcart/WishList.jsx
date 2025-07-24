@@ -7,14 +7,10 @@ import Carthader from './Carthader';
 
 const WishList = () => {
     const { wishItem, addwishlist, clearwishlist, removeFromWishlist, products } = useContext(ProductContext);
+    const wishlistProducts = products.filter(product => wishItem[product._id] > 0);
+
     const navigate = useNavigate();
     console.log("Wish Items:", wishItem);
-
-    // const wishlistProducts = wishItem; 
-    // const wishlistProducts = products.filter(product => wishItem[product._id] > 0);
-    console.log("Wish Items:", wishItem);
-
-    const wishlistProducts = wishItem || []; // defensive fallback
 
     if (wishlistProducts.length === 0) {
         return (
@@ -48,22 +44,22 @@ const WishList = () => {
 
                             <div className="flex text-sm text-gray-600 mb-1">
                                 <span className="pr-8">Size: Unstitched</span>
-                                <span className="pr-8">Qty: {wishItem[product._id]}</span>
+                                {/* <span className="pr-8">Qty: {wishItem[product._id]}</span> */}
                                 <span>Color: {product.color || 'red'}</span>
                             </div>
 
-                            <div className="flex gap-3 mt-2">
-                                <p className='text-sm text-gray-600'>Qty :</p>
+                            {/* <div className="flex gap-3 mt-2">
+                                 <p className='text-sm text-gray-600'>Qty :</p>
                                 <Link onClick={() => removeFromWishlist(product._id)} className="p-1 bg-gray-300 text-black">
                                     <FaMinus size={10} />
                                 </Link>
                                 <Link onClick={() => addwishlist(product._id)} className="p-1 bg-gray-300 text-black">
                                     <FaPlus size={10} />
                                 </Link>
-                            </div>
+                            </div> */}
 
-                            <div className="flex flex-wrap justify-between pt-[10px]">
-                                <a href="/" className="text-black text-[13px] underline cursor-pointer">Move to Cart</a>
+                            <div className="flex flex-wrap justify-end pt-[10px]">
+                                {/* <a href="/" className="text-black text-[13px] underline cursor-pointer">Move to Cart</a> */}
                                 <div className="pr-3">
                                     <RiDeleteBin5Fill onClick={() => clearwishlist(product._id)} className="w-5 h-5 text-red-700 cursor-pointer hover:opacity-80 " />
                                 </div>

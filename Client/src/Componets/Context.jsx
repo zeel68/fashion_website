@@ -4,7 +4,6 @@ import React, { createContext, useState, useEffect } from 'react';
 export const ProductContext = createContext(null);
 
 
-
 // https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api
 // store Id:- 6874da6ef34b88733c0b452c
 
@@ -29,10 +28,22 @@ const getInitialCart = () => {
   return cart;
 };
 
+const getInitialwish = () => {
+  const storedwish = localStorage.getItem('wishItem');
+  if (storedwish) {
+    return JSON.parse(storedwish);
+  }
+  const wish = {};
+  Products.forEach(product => {
+    wish[product.id] = 0;
+  });
+  return wish;
+};
+
 const ContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [cartItem, setCartItem] = useState(getInitialCart, getDefaultCart);
-  const [wishItem, setwishItem] = useState({});
+  const [wishItem, setwishItem] = useState(getInitialwish, getDefaultCart);
 
   const [token, setToken] = useState(localStorage.getItem("token") || "");
 
@@ -241,12 +252,10 @@ const ContextProvider = ({ children }) => {
     }
   };
 
-
-
-
   const contextValue = {
     products,
     cartItem,
+    wishItem,
     setProducts,
     addTocart,
     removeTocart,
