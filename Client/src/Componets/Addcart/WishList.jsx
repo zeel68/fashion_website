@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import Carthader from './Carthader';
+import { IoCloseSharp } from 'react-icons/io5';
 
 const WishList = () => {
     const { wishItem, addwishlist, clearwishlist, removeFromWishlist, products } = useContext(ProductContext);
@@ -34,7 +35,13 @@ const WishList = () => {
                             <img src={product.image} alt={product.name} className="w-[110px] h-[120px] block" />
                         </div>
                         <div className="w-full p-4">
-                            <h3 className="text-[15px] font-normal hover:underline">{product.name}</h3>
+                            <div className="flex flex-wrap justify-between">
+                                <h3 className="text-[15px] font-normal hover:underline">{product.name}</h3>
+                                <div className="pr-3">
+                                    <IoCloseSharp onClick={() => removeFromWishlist(product._id)} className="w-5 h-5 text-black cursor-pointer hover:opacity-80 " />
+
+                                </div>
+                            </div>
                             <div className="text-right flex">
                                 <p className="text-[15px] text-[#555] pr-3">Price: ₹{product.price}</p>
                                 {product.oldprice && (
@@ -58,19 +65,18 @@ const WishList = () => {
                                 </Link>
                             </div> */}
 
-                            <div className="flex flex-wrap justify-end pt-[10px]">
-                                {/* <a href="/" className="text-black text-[13px] underline cursor-pointer">Move to Cart</a> */}
-                                <div className="pr-3">
-                                    <RiDeleteBin5Fill onClick={() => clearwishlist(product._id)} className="w-5 h-5 text-red-700 cursor-pointer hover:opacity-80 " />
-                                </div>
-                            </div>
                         </div>
                     </div>
                 ))}
 
-                <button onClick={() => navigate('/')} className="mt-4 bg-[#d4b952] text-white py-2 px-4 rounded">
-                    Continue Shopping
-                </button>
+                <div className="flex justify-between">
+                    <button onClick={() => navigate('/')} className="mt-4 bg-[#d4b952] text-white py-2 px-4 rounded">
+                        Continue Shopping
+                    </button>
+                    <Link onClick={clearwishlist} className="mt-4 bg-[#d4b952] text-white py-2 px-4 rounded">
+                        Clear cart
+                    </Link>
+                </div>
             </div>
         </div>
     );

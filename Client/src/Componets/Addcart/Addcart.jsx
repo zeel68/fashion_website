@@ -6,10 +6,11 @@ import { ProductContext } from '../Context';
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import { Link, useNavigate } from 'react-router-dom';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
+import { IoCloseSharp } from 'react-icons/io5';
 
 
 const Addcart = () => {
-    const { cartItem, clearcart, addTocart, removeTocart, products } = useContext(ProductContext);
+    const { cartItem, updatequa, clearcart, remove, addTocart, products } = useContext(ProductContext);
     const navigate = useNavigate();
 
     const cartProducts = products.filter(product => cartItem[product._id] > 0);
@@ -54,7 +55,14 @@ const Addcart = () => {
 
                                 <div className="w-full p-4">
                                     <div className="">
-                                        <h3 className="text-[15px] font-normal hover:underline">{product.name}</h3>
+                                        <div className="flex flex-wrap justify-between">
+                                            <h3 className="text-[15px] font-normal hover:underline">{product.name}</h3>
+                                            <div className="pr-3">
+                                                <IoCloseSharp onClick={() => remove(product._id)} className="w-5 h-5 text-black cursor-pointer hover:opacity-80 " />
+
+                                            </div>
+                                        </div>
+
                                         <div className="text-right flex">
                                             <p className="text-[15px] text-[#555] pr-3">Price: ₹{product.price}</p>
                                             {product.oldprice && (
@@ -73,20 +81,18 @@ const Addcart = () => {
                                     <div className="flex gap-3">
                                         <p className=' text-sm text-gray-600'>Qty :</p>
 
-                                        <Link onClick={() => { console.log("remove to cart:", product); removeTocart(product._id); }} className="p-1 bg-gray-300 text-black">
-                                            <FaMinus size={10} />
-                                        </Link>
+
                                         <Link onClick={() => { console.log("add to cart:", product); addTocart(product._id); }} className="p-1 bg-gray-300 text-black">
                                             <FaPlus size={10} />
+                                        </Link>
+                                        <Link onClick={() => { console.log("update to cart:", product); updatequa(product._id); }} className="p-1 bg-gray-300 text-black">
+                                            <FaMinus size={10} />
                                         </Link>
 
                                     </div>
                                     <div className="flex flex-wrap justify-between pt-[10px]">
                                         <a href="/" className="text-black text-[13px] underline cursor-pointer">Move to Wishlist</a>
-                                        <div className="pr-3">
-                                            <RiDeleteBin5Fill onClick={() => clearcart(product._id)} className="w-5 h-5 text-red-700 cursor-pointer hover:opacity-80 " />
 
-                                        </div>
                                     </div>
 
                                 </div>
@@ -95,7 +101,9 @@ const Addcart = () => {
 
                         <div className="flex justify-between items-center mb-6 border border-[#ececec] mt-6 p-4">
                             <a href="#" className="text-[#d4b952] text-[15px] font-light cursor-pointer">← Continue Shopping</a>
-                            <a href="#" className="text-[#6e6e6e] text-[13px] underline cursor-pointer">Add more from wishlist</a>
+                            <Link onClick={clearcart} className="text-[#6e6e6e] text-[13px] underline cursor-pointer">
+                                Clear cart
+                            </Link>
                         </div>
                     </div>
 

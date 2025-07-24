@@ -79,7 +79,7 @@ const ContextProvider = ({ children }) => {
 
       // get wishlist
       fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/wishlist', {
-        method: 'GET',
+        method: 'POST',
         headers: {
           Accept: 'application/form-data',
           'auth-token': `${localStorage.getItem('auth-token')}`,
@@ -125,32 +125,65 @@ const ContextProvider = ({ children }) => {
   };
 
   // remove
-  const removeTocart = async (itemId) => {
-    setCartItem((prev) => ({
-      ...prev,
-      [itemId]: prev[itemId] > 0 ? prev[itemId] - 1 : 0,
-    }));
-    if (localStorage.getItem('auth-token')) {
-      try {
-        const response = await fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452/cart/remove', {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'auth-token': `${localStorage.getItem('auth-token')}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ "itemId": itemId }),
-        });
-        const data = await response.json();
-        console.log(data);
-      } catch (error) {
-        console.error('Failed to remove from cart', error);
-      }
-    }
+  // const removeTocart = async (itemId) => {
+  //   setCartItem((prev) => ({
+  //     ...prev,
+  //     [itemId]: prev[itemId] > 0 ? prev[itemId] - 1 : 0,
+  //   }));
+  //   if (localStorage.getItem('auth-token')) {
+  //     try {
+  //       const response = await fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452/cart/remove', {
+  //         method: 'POST',
+  //         headers: {
+  //           Accept: 'application/json',
+  //           'auth-token': `${localStorage.getItem('auth-token')}`,
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: JSON.stringify({ "itemId": itemId }),
+  //       });
+  //       const data = await response.json();
+  //       console.log(data);
+  //     } catch (error) {
+  //       console.error('Failed to remove from cart', error);
+  //     }
+  //   }
 
+  // };
+
+  const updatequa = async (itemId) => {
+    const newQuantity = cartItem[itemId] - 1;
+
+    if (newQuantity > 0) {
+      setCartItem((prev) => ({
+        ...prev,
+        [itemId]: newQuantity,
+      }));
+
+      if (localStorage.getItem('auth-token')) {
+        try {
+          const response = await fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452/cart/update', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'auth-token': localStorage.getItem('auth-token'),
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ itemId, quantity: newQuantity }),
+          });
+          const data = await response.json();
+          console.log("Quantity updated:", data);
+        } catch (error) {
+          console.error('Failed to update quantity', error);
+        }
+      }
+    } else {
+      remove(itemId);
+    }
   };
 
-  const clearcart = async (itemId) => {
+
+  // removefrom cart
+  const remove = async (itemId) => {
     setCartItem((prev) => {
       const updatedCart = { ...prev };
       delete updatedCart[itemId];
@@ -160,7 +193,31 @@ const ContextProvider = ({ children }) => {
 
     if (localStorage.getItem('auth-token')) {
       try {
-        const response = await fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/cart/delete', {
+        const response = await fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/cart/remove', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'auth-token': `${localStorage.getItem('auth-token')}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ "itemId": itemId }),
+        });
+        const data = await response.json();
+        console.log("Item delete:", data);
+      } catch (error) {
+        console.error('not delete', error);
+      }
+    }
+  };
+
+  // clearcart
+  const clearcart = async (itemId) => {
+    setCartItem({});
+
+
+    if (localStorage.getItem('auth-token')) {
+      try {
+        const response = await fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/wishlist/clear', {
           method: 'POST',
           headers: {
             Accept: 'application/json',
@@ -178,12 +235,10 @@ const ContextProvider = ({ children }) => {
   };
 
 
+
   // wishlist
 
   // Add to Wishlist
-
-
-
   const addwishlist = (itemId) => {
     setwishItem((prev) => ({
       ...prev,
@@ -204,34 +259,37 @@ const ContextProvider = ({ children }) => {
     }
   };
 
-  // RemoveWishlist
-  const removeFromWishlist = (itemId) => {
-    setwishItem((prev) => ({
-      ...prev,
-      [itemId]: prev[itemId] > 0 ? prev[itemId] - 1 : 0,
-    }));
-    if (localStorage.getItem('auth-token')) {
-      fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/wishlist/remove', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'auth-token': `${localStorage.getItem('auth-token')}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ "itemId": itemId }),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log("Wishlist removed:", data));
-    }
-  };
 
-  // wishlistclear
-  const clearwishlist = async (itemId) => {
+  // removewishlist
+  const removeFromWishlist = async (itemId) => {
     setwishItem((prev) => {
       const updatedCart = { ...prev };
       delete updatedCart[itemId];
       return updatedCart;
     });
+
+    if (localStorage.getItem('auth-token')) {
+      try {
+        const response = await fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/wishlist/remove', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'auth-token': `${localStorage.getItem('auth-token')}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ "itemId": itemId }),
+        });
+        const data = await response.json();
+        console.log("Item delete:", data);
+      } catch (error) {
+        console.error('not delete', error);
+      }
+    }
+  };
+
+  // clearwishlist
+  const clearwishlist = async (itemId) => {
+    setwishItem({});
 
     if (localStorage.getItem('auth-token')) {
       try {
@@ -258,11 +316,13 @@ const ContextProvider = ({ children }) => {
     wishItem,
     setProducts,
     addTocart,
-    removeTocart,
+    // removeTocart,
     clearcart,
+    remove,
     addwishlist,
     removeFromWishlist,
     clearwishlist,
+    updatequa
   };
 
   return (
