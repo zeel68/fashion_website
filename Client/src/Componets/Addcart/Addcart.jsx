@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { LuBadgePercent } from "react-icons/lu";
 import { GoGift } from "react-icons/go";
 import Carthader from './Carthader';
@@ -7,10 +7,12 @@ import { FaMinus, FaPlus } from "react-icons/fa6";
 import { Link, useNavigate } from 'react-router-dom';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { IoCloseSharp } from 'react-icons/io5';
+import CouponPopup from './CouponPopup';
 
 
 const Addcart = () => {
     const { cartItem, updatequa, clearcart, remove, addTocart, products } = useContext(ProductContext);
+
     const navigate = useNavigate();
 
     const cartProducts = products.filter(product => cartItem[product._id] > 0);
@@ -111,13 +113,12 @@ const Addcart = () => {
                     <div className="w-[35%] p-3">
                         <h3 className="text-[20px] text-[#555] font-semibold mb-4">Price Details</h3>
                         <div className="bg-[#f4f4f4] p-4">
-                            <div className="flex justify-between items-center mb-2 text-[13px] pb-2 font-normal border-b border-[#d6d6d6]">
-                                <p className="flex items-center gap-2"><LuBadgePercent />Apply Coupon</p>
-                                <a href="#" className="text-[#d4b952] underline">View Offers</a>
-                            </div>
 
+                            <CouponPopup />
+                           
                             <div className="flex justify-between items-center mb-2 text-[13px] font-normal pb-2 border-b border-[#d6d6d6]">
                                 <p className="flex items-center gap-2"><LuBadgePercent />Affiliate Code</p>
+
                                 <a href="#" className="text-[#d4b952] underline">Apply</a>
                             </div>
 

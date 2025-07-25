@@ -7,7 +7,7 @@ import Carthader from './Carthader';
 import { IoCloseSharp } from 'react-icons/io5';
 
 const WishList = () => {
-    const { wishItem, addwishlist, clearwishlist, removeFromWishlist, products } = useContext(ProductContext);
+    const { wishItem, clearwishlist, removeFromWishlist, products } = useContext(ProductContext);
     const wishlistProducts = products.filter(product => wishItem[product._id] > 0);
 
     const navigate = useNavigate();

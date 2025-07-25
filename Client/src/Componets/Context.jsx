@@ -213,8 +213,6 @@ const ContextProvider = ({ children }) => {
   // clearcart
   const clearcart = async (itemId) => {
     setCartItem({});
-
-
     if (localStorage.getItem('auth-token')) {
       try {
         const response = await fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/wishlist/clear', {
@@ -310,6 +308,36 @@ const ContextProvider = ({ children }) => {
     }
   };
 
+
+  // refreshtoken
+  const Refreshtoken = async () => {
+    const refreshToken = localStorage.getItem("refresh-token");
+    if (!refreshToken) return null;
+
+    try {
+      const response = await fetch("https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/auth/refresh-token", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ refreshToken })
+      });
+
+      const data = await response.json();
+
+      if (data.accessToken) {
+        localStorage.setItem("auth-token", data.accessToken);
+        return data.accessToken;
+      } else {
+        console.log("Refresh token invalid or expired");
+        return null;
+      }
+    } catch (error) {
+      console.error("Error refreshing token", error);
+      return null;
+    }
+  };
+
   const contextValue = {
     products,
     cartItem,
@@ -322,7 +350,8 @@ const ContextProvider = ({ children }) => {
     addwishlist,
     removeFromWishlist,
     clearwishlist,
-    updatequa
+    updatequa,
+    Refreshtoken
   };
 
   return (

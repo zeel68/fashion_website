@@ -7,7 +7,7 @@ const MyOrder = () => {
   const fetchOrders = async () => {
     try {
       const token = localStorage.getItem("auth-token");
-      const res = await axios.get("http://localhost:4040/api/order/myorders", {
+      const res = await axios.get(`https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/orders/${id}`, {
         headers: {
           "auth-token": token
         }

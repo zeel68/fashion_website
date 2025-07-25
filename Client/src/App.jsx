@@ -51,6 +51,7 @@ import WishList from './Componets/Addcart/WishList';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Reviews from './Componets/product details/Reviews';
+import CouponPopup from './Componets/Addcart/CouponPopup';
 function App() {
 
   return (
@@ -98,6 +99,8 @@ function App() {
             {/* <Route path='/treckorder/logout' element={<Profile />} /> */}
           </Route>
           <Route path='/Wholesale' element={<Wholesale />} />
+          <Route path='/coupon' element={<CouponPopup />} />
+
           <Route path='/Affiliate' element={<Affiliate />} />
           <Route path='/storelocatore' element={<Storelocator />} />
 
