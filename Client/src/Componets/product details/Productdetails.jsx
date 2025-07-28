@@ -1,41 +1,56 @@
-import React, { useContext, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import ProductTop from './ProductTop';
 import ProductTopRight from './ProductTopRight';
 import ProductBottom from './ProductBottom';
 import AlsoLike from './AlsoLike';
 import { Link, useParams } from 'react-router-dom';
-import SareesDetails from '../Sarees/Sareedetails';
 import Breadcrum from '../Breadcrum/Breadcrum';
 
 const Productdetails = () => {
     const { id } = useParams();
-    const product = SareesDetails.find((e) => e.id === Number(id));
+    const [product, setProduct] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchProduct = async () => {
+            try {
+                const res = await fetch(`https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/products/${id}`);
+                const data = await res.json();
+                setProduct(data.data.product);
+                console.log("Details", data.data.product);
+            } catch (err) {
+                console.error("Failed to fetch product:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProduct();
+    }, [id]);
 
     const path = [
         { name: "Home", link: "/" },
-        // { name: "sarees", link: "/sarees" },
-        { name: product?.category, link: `/${product?.category?.toLowerCase()}` },
+        // { name: category, link: `/${category.toLowerCase()}` },
     ];
+
+    if (loading) return <div>Loading product...</div>;
+    if (!product) return <div>Product not found</div>;
+
     return (
         <>
-            {
-                product && (
-                    <Breadcrum path={path} current={product.name} />
-                )
-            }
             <div className="block mb-[50px] font-['Lato']">
                 <div className="max-w-screen-xxl mx-auto px-4 box-border sm:px-6 lg:px-8">
+                    <Breadcrum path={path} current={product.name} />
 
                     <div className="flex flex-wrap justify-between">
-
                         {/* left-side */}
-                        <ProductTop />
+                        <ProductTop product={product} />
                         {/* right-side */}
-                        <ProductTopRight />
+                        <ProductTopRight product={product} />
                         {/* bottom similary */}
-                        <ProductBottom category="Sarees" />
+                        <ProductBottom category="DEMO" />
                         {/* Also Like */}
-                        <AlsoLike category="Saree" />
+                        <AlsoLike category="DEMO" />
 
                         <div className="w-full mx-auto flex justify-center gap-4 px-4">
                             <div className="w-full md:w-[46%] pt-[50px] text-center">
@@ -49,12 +64,11 @@ const Productdetails = () => {
                                 </Link>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default Productdetails
+export default Productdetails;

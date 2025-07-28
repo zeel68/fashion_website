@@ -9,7 +9,7 @@ import Login from './Login';
 import { CiHeart } from 'react-icons/ci';
 
 const Navbar = ({ category }) => {
-    const Nav = ["Category", "Women_clothing", "KurtaSet", "SalwarKameez", "Shirts", "Sarees", "Mens", "Kids", "Jewellery", "Blouses", "Dupattas", "Festivals", "Home_Living"];
+    const Nav = ["Category", "Women_clothing", "KurtaSet", "SalwarKameez", "DEMO", "Sarees", "DEMO1", "Kids", "Jewellery", "Blouses", "Dupattas", "Festivals", "Home_Living"];
     const { products = [], cartItem, wishItem } = useContext(ProductContext) || {};
     // const filtered = products.filter(item => item.category === category);
     const filteredProducts = products.filter(item =>

@@ -4,12 +4,12 @@ import { FaEye, FaFacebookF, FaIndianRupeeSign, FaInstagram, FaPinterest, FaTruc
 import { MdDeliveryDining, MdOutlineSecurity } from "react-icons/md";
 import { ProductContext } from '../Context';
 
-const ProductTopRight = () => {
+const ProductTopRight = ({ product }) => {
 
-  const { id } = useParams();
-  const { products, addTocart, addwishlist } = useContext(ProductContext);
+  // const { id } = useParams();
+  const { addTocart, addwishlist } = useContext(ProductContext);
 
-  const product = products.find(p => p._id === (id));
+  // const product = products.find(p => p._id === (id));
 
   if (!product) return <div>Product not found</div>;
   return (
@@ -110,3 +110,4 @@ const ProductTopRight = () => {
 };
 
 export default ProductTopRight;
+

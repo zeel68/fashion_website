@@ -1,8 +1,6 @@
 import React, { useContext } from 'react';
 import { ProductContext } from '../Context';
 import { Link, useNavigate } from 'react-router-dom';
-import { RiDeleteBin5Fill } from 'react-icons/ri';
-import { FaMinus, FaPlus } from "react-icons/fa6";
 import Carthader from './Carthader';
 import { IoCloseSharp } from 'react-icons/io5';
 

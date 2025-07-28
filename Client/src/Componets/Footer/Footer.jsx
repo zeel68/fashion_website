@@ -79,7 +79,7 @@ const Footer = ({ items }) => {
                             <div className="sighnup">
                                 <h3 className='flex justify-center text-[16px] font-bold pb-[10px] uppercase'>Newsletter Signup</h3>
                                 <div className="flex justify-center">
-                                    <input className='bg-[#fff] border text-[#b0b0b0] py-[10px] outline' type="text" placeholder='Enter Email Address' />
+                                    <input className='bg-[#fff] border text-[#b0b0b0] p-[10px]  outline' type="text" placeholder='Enter Email Address' />
                                     <button className='uppercase bg-[#000] text-[#fff] px-[10px]'>Subscribe</button>
                                 </div>
                             </div>

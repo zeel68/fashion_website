@@ -2,7 +2,7 @@ import React from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
 
-const Breadcrum = ({ path, current }) => {
+const Breadcrum = ({ path, current, category }) => {
 
     const steps = path && Array.isArray(path) ? path : [{ name: "Home", link: "/" }];
 
@@ -17,7 +17,9 @@ const Breadcrum = ({ path, current }) => {
                         <IoIosArrowForward className="w-[16px] h-[16px]" />
                     </React.Fragment>
                 ))}
+                {/* <span className="text-black">{category}</span> */}
                 <span className="text-black">{current}</span>
+
             </div>
         </div>
     );

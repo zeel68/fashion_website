@@ -9,7 +9,6 @@ import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { IoCloseSharp } from 'react-icons/io5';
 import CouponPopup from './CouponPopup';
 
-
 const Addcart = () => {
     const { cartItem, updatequa, clearcart, remove, addTocart, products } = useContext(ProductContext);
 

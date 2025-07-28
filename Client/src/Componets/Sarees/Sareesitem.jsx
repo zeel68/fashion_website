@@ -3,7 +3,6 @@ import Sareeprop, { Product } from './Sareeprop'
 import { IoMdArrowDropdown } from 'react-icons/io';
 import Breadcrum from '../Breadcrum/Breadcrum';
 import { ProductContext } from '../Context';
-// import SareesDetails from './Sareedetails';
 
 const filters = {
     Categories: [

@@ -1,14 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { FaChevronLeft, FaChevronRight, FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import SareeProps from './SareeProps';
 import { Autoplay, Navigation } from 'swiper/modules';
 import { useParams } from "react-router-dom";
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-// import SareesDetails from '../Sarees/Sareedetails';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa6';
 import { ProductContext } from '../Context';
 
@@ -49,11 +47,6 @@ const ProductBottom = ({ category }) => {
 
     return (
         <>
-            <div className="block">
-                <p>Add Review</p>
-                <input type="text" placeholder='Add Review' />
-                <button>ADD</button>
-            </div>
             {/* Description Section */}
             <div className="border-b border-b-[#dcdcdc] w-full">
                 <div className="cursor-pointer pt-4 pb-4 text-[17px] font-bold flex justify-between items-center" onClick={toggleMenu}>

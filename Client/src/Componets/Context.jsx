@@ -3,10 +3,8 @@ import React, { createContext, useState, useEffect } from 'react';
 
 export const ProductContext = createContext(null);
 
-
 // https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api
 // store Id:- 6874da6ef34b88733c0b452c
-
 
 // Default empty cart for 300 items
 const getDefaultCart = () => {
@@ -16,6 +14,7 @@ const getDefaultCart = () => {
   }
   return cart;
 };
+
 const getInitialCart = () => {
   const storedCart = localStorage.getItem('cartItem');
   if (storedCart) {
@@ -63,7 +62,6 @@ const ContextProvider = ({ children }) => {
       });
 
     if (localStorage.getItem('auth-token')) {
-
       // fetch('http://localhost:4040/getcart', {
       fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/cart', {
         method: 'POST',
@@ -75,7 +73,6 @@ const ContextProvider = ({ children }) => {
         body: "",
       }).then((response) => response.json())
         .then((data) => setCartItem(data));
-
 
       // get wishlist
       fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/wishlist', {
