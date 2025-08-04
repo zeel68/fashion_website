@@ -9,18 +9,21 @@ const store = create((set) => ({
 
   login: async ({ email, password }) => {
     try {
-      const res = await axios.post('http://65.1.3.198:5050/api/auth/login', { email, password });
+      const res = await axios.post('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/auth/login', { email, password });
       console.log(res.data.data.user);
 
       const userData = {
         name: res.data.data.user.name,
         email: res.data.data.user.email,
-        token: res.data.data.user.token
+        token: res.data.data.accessToken,
       };
 
       localStorage.setItem('name', userData.name);
       localStorage.setItem('email', userData.email);
-      localStorage.setItem('auth-token', userData.token);
+      localStorage.setItem('access_token', userData.token);
+
+      console.log("token:", localStorage.getItem('access_token'));
+
 
       set({ user: res.data.data.user, error: null });
       return { success: true };
@@ -33,7 +36,7 @@ const store = create((set) => ({
 
   signup: async (formData) => {
     try {
-      const res = await axios.post('http://65.1.3.198:5050/api/auth/register', formData);
+      const res = await axios.post('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/auth/register', formData);
       console.log("Registration success:", res.data);
       set({ registered: true, error: null });
       return { success: true };
@@ -46,7 +49,7 @@ const store = create((set) => ({
 
   forgot: async (email) => {
     try {
-      const res = await axios.post('http://65.1.3.198:5050/api/auth/forgot-password', { email });
+      const res = await axios.post('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/auth/forgot-password', { email });
       console.log(res.data);
       alert(res.data.message);
       return true;
@@ -59,7 +62,7 @@ const store = create((set) => ({
 
   logout: async () => {
     try {
-      await axios.post('http://65.1.3.198:5050/api/auth/logout');
+      await axios.post('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/auth/logout');
       set({ user: null });
       localStorage.removeItem('auth-token');
       console.log('Logged out');

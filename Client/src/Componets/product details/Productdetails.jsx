@@ -48,7 +48,7 @@ const Productdetails = () => {
                         {/* right-side */}
                         <ProductTopRight product={product} />
                         {/* bottom similary */}
-                        <ProductBottom category="DEMO" />
+                        <ProductBottom category="DEMO" product={product} />
                         {/* Also Like */}
                         <AlsoLike category="DEMO" />
 

@@ -12,6 +12,7 @@ import CouponPopup from './CouponPopup';
 const Addcart = () => {
     const { cartItem, updatequa, clearcart, remove, addTocart, products } = useContext(ProductContext);
 
+
     const navigate = useNavigate();
 
     const cartProducts = products.filter(product => cartItem[product._id] > 0);
@@ -32,7 +33,7 @@ const Addcart = () => {
                     <h2 className="text-[20px] text-[#555] font-semibold mb-4">Your cart is empty.</h2>
                 </div>
             </div>
-        );
+        )
     }
 
     return (
@@ -114,7 +115,7 @@ const Addcart = () => {
                         <div className="bg-[#f4f4f4] p-4">
 
                             <CouponPopup />
-                           
+
                             <div className="flex justify-between items-center mb-2 text-[13px] font-normal pb-2 border-b border-[#d6d6d6]">
                                 <p className="flex items-center gap-2"><LuBadgePercent />Affiliate Code</p>
 

@@ -1,17 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from "react-router-dom";
-import { FaEye, FaFacebookF, FaIndianRupeeSign, FaInstagram, FaPinterest, FaTruckFast, FaWhatsapp } from "react-icons/fa6";
+import { FaEye, FaFacebookF, FaIndianRupeeSign, FaInstagram, FaPinterest, FaPlus, FaTruckFast, FaWhatsapp } from "react-icons/fa6";
 import { MdDeliveryDining, MdOutlineSecurity } from "react-icons/md";
 import { ProductContext } from '../Context';
 
 const ProductTopRight = ({ product }) => {
-
   // const { id } = useParams();
   const { addTocart, addwishlist } = useContext(ProductContext);
-
   // const product = products.find(p => p._id === (id));
-
   if (!product) return <div>Product not found</div>;
+
   return (
     <div className="w-[33%] pt-[2px]">
       <div className="block">
@@ -32,9 +30,6 @@ const ProductTopRight = ({ product }) => {
 
       <span className='text-[14px] text-[#666] mt-[10px]'>MRP (Inclusive of all taxes)</span>
       <p className='text-[12px] text-[#999] mt-[10px] font-bold'>SKU: <span>{product.sku || 'XSR30702U'}</span></p>
-      <div className="block my-[10px]">
-        <span className='text-[14px]'>{product.description}</span>
-      </div>
       <div className="flex flex-wrap pt-[5px] pr-[10px] pb-0 align-middle">
         <div className="flex flex-wrap border-r border-r-[#bcbcbc] pr-[5px]">
           <FaTruckFast className='w-[16px]' />
@@ -53,17 +48,18 @@ const ProductTopRight = ({ product }) => {
       </div>
 
       <div className="flex mt-[25px] w-full">
-
-
-        <Link onClick={() => {
-          console.log("Added to cart:", product);
-          addTocart(product._id);
-        }} className='text-white bg-black text-center text-[12px] pt-[18px] pb-[18px] w-[55%] font-bold tracking-[1px] hover:bg-red-800 transition duration-300 ease-in-out'>
+        <button
+          onClick={() => {
+            // console.log("Added to cart:", product);
+            addTocart(product._id);
+          }}
+          className='text-white bg-black text-center text-[12px] pt-[18px] pb-[18px] w-[55%] font-bold tracking-[1px] hover:bg-red-800 transition duration-300 ease-in-out'
+        >
           ADD TO BAG
-        </Link>
+        </button>
 
         <Link onClick={() => {
-          console.log("Added to wish:", product);
+          // console.log("Added to wish:", product);
           addwishlist(product._id);
         }} className='text-center text-[12px] pt-[17px] pb-[17px] pl-[10px] border border-[#dcdcdc] ml-[3%] box-border bg-white text-black pr-[10px] w-[42%] font-bold tracking-[1px] hover:bg-red-800 hover:text-white transition duration-300 ease-in-out'>
           ADD TO WISHLIST

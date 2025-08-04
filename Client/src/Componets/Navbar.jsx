@@ -9,13 +9,15 @@ import Login from './Login';
 import { CiHeart } from 'react-icons/ci';
 
 const Navbar = ({ category }) => {
-    const Nav = ["Category", "Women_clothing", "KurtaSet", "SalwarKameez", "DEMO", "Sarees", "DEMO1", "Kids", "Jewellery", "Blouses", "Dupattas", "Festivals", "Home_Living"];
+    const Nav = ["Category", "Women_clothing", "DEMO121", "T-Shirt", "DEMO", "Sarees", "DEMO1", "Kids", "Jewellery", "Blouses", "Dupattas", "Festivals", "Home_Living"];
     const { products = [], cartItem, wishItem } = useContext(ProductContext) || {};
     // const filtered = products.filter(item => item.category === category);
+    // const filteredProducts = products.filter(item =>
+    //     item.name?.toLowerCase().includes(category?.toLowerCase())
+    // );
     const filteredProducts = products.filter(item =>
         item.name?.toLowerCase().includes(category?.toLowerCase())
     );
-
 
     const [active, setactive] = useState(Nav[0]);
     const [menu, setmenu] = useState(false);
@@ -54,9 +56,9 @@ const Navbar = ({ category }) => {
                                 <li><Link to="/storelocatore" className="px-2">Store Locator</Link><span className="text-[#ccc]">|</span></li>
 
                                 {/* Login / Logout */}
-                                {localStorage.getItem('auth-token') ? (
+                                {localStorage.getItem('access_token') ? (
                                     <li>
-                                        <button onClick={() => { localStorage.removeItem('auth-token'); window.location.replace("/") }} className="px-2">Logout</button>
+                                        <button onClick={() => { localStorage.removeItem('access_token'); window.location.replace("/") }} className="px-2">Logout</button>
                                         <span className="text-[#ccc]">|</span>
                                     </li>
                                 ) : (
@@ -199,9 +201,21 @@ const Navbar = ({ category }) => {
                                     />
                                     <FaSearch onClick={() => setOpen(!open)} className="cursor-pointer ml-2" />
                                 </div>
-                                <div className="flex align-middle justify-around items-center w-[80px] border border-[#ccc]">
-                                    <FaIndianRupeeSign />
-                                    INR
+                                <div className="flex align-middle justify-around items-center w-[100px] border border-[#ccc]">
+
+                                    <select defaultValue="inr" className="p-2 rounded-md text-sm">
+                                        <option value="inr" >INR – ₹  </option>
+                                        <option value="usd">USD – $ </option>
+                                        <option value="eur">EUR – € </option>
+                                        <option value="gbp">GBP – £  </option>
+                                        <option value="jpy">JPY – ¥ </option>
+                                        <option value="cad">CAD – $ </option>
+                                        <option value="aud">AUD – $ </option>
+                                        <option value="cny">CNY – ¥ </option>
+                                        <option value="aed">AED – د.إ </option>
+                                        <option value="zar">ZAR – R </option>
+                                    </select>
+
                                 </div>
                             </div>
                         </div>

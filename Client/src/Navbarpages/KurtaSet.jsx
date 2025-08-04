@@ -3,8 +3,8 @@ import Sareesitem from '../Componets/Sarees/Sareesitem'
 
 const KurtaSet = () => {
   return (
-    <Sareesitem category="KurtaSet"/>
-  
+    <Sareesitem category="DEMO121" />
+
   )
 }
 

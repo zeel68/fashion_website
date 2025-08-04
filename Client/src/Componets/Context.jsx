@@ -6,7 +6,6 @@ export const ProductContext = createContext(null);
 // https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api
 // store Id:- 6874da6ef34b88733c0b452c
 
-// Default empty cart for 300 items
 const getDefaultCart = () => {
   let cart = {};
   for (let index = 0; index <= 300; index++) {
@@ -43,46 +42,49 @@ const ContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [cartItem, setCartItem] = useState(getInitialCart, getDefaultCart);
   const [wishItem, setwishItem] = useState(getInitialwish, getDefaultCart);
-
-  const [token, setToken] = useState(localStorage.getItem("token") || "");
+  const [token, setToken] = useState(localStorage.getItem("access_token") || "");
 
   // for all product
-
   useEffect(() => {
-    // fetch('http://localhost:4040/allproduct')
     fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/products?page=1&limit=12&sort=created_at&order=desc')
 
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.data.products);
-        console.log("Fetched Products: ", data);
+        // console.log("Fetched Products: ", data);
       })
       .catch((err) => {
         console.error("Failed to fetch products:", err);
       });
 
-    if (localStorage.getItem('auth-token')) {
-      // fetch('http://localhost:4040/getcart', {
+    if (localStorage.getItem('access_token')) {
       fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/cart', {
-        method: 'POST',
+        method: 'GET',
         headers: {
-          Accept: 'application/form-data',
-          'auth-token': `${localStorage.getItem('auth-token')}`,
+          Accept: 'application/json',
+          'Authorization': `Bearer ${token}`,
+          // 'access_token': `${localStorage.getItem('access_token')}`,
           'Content-Type': 'application/json',
         },
-        body: "",
+        // body: "",
       }).then((response) => response.json())
-        .then((data) => setCartItem(data));
+        .then((data) => {
+          console.log("cart", data);
+          setCartItem(data.data?.cart?.items || []);
+        });
+      // .then((response) => response.json())
+      //   .then((data) => setCartItem(data));
 
       // get wishlist
       fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/wishlist', {
-        method: 'POST',
+        method: 'GET',
         headers: {
           Accept: 'application/form-data',
-          'auth-token': `${localStorage.getItem('auth-token')}`,
+          'Authorization': `Bearer ${token}`,
+          // 'access_token': `${localStorage.getItem('access_token')}`,
           'Content-Type': 'application/json',
         },
-        body: "",
+        // body: "",
       }).then((response) => response.json())
         .then((data) => {
           console.log("Wishlist:", data);
@@ -95,29 +97,60 @@ const ContextProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('cartItem', JSON.stringify(cartItem));
   }, [cartItem]);
+
   useEffect(() => {
     localStorage.setItem('wishItem', JSON.stringify(wishItem));
   }, [wishItem]);
 
   // add to cart
+  // const addTocart = (itemId) => {
+  //   setCartItem((prev) => ({
+  //     ...prev,
+  //     [itemId]: (prev[itemId] || 0) + 1,
+  //   }));
+  //   if (localStorage.getItem('access_token')) {
+  //     // fetch('http://localhost:4040/addtocart', {
+  //     fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/cart/add', {
+  //       method: 'POST',
+  //       headers: {
+  //         Accept: 'application/json',
+  //         // 'access_token': `${localStorage.getItem('access_token')}`,
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ "itemId": itemId }),
+  //     })
+  //       .then((response) => response.json())
+  //       .then((data) => console.log("getcartdata", data));
+  //   }
+  // };
   const addTocart = (itemId) => {
     setCartItem((prev) => ({
       ...prev,
       [itemId]: (prev[itemId] || 0) + 1,
-    }));
-    if (localStorage.getItem('auth-token')) {
-      // fetch('http://localhost:4040/addtocart', {
+    }
+    ));
+
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      console.log("Token", token);
       fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/cart/add', {
         method: 'POST',
         headers: {
-          Accept: 'application/json',
-          'auth-token': `${localStorage.getItem('auth-token')}`,
+          'Accept': 'application/json',
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ "itemId": itemId }),
+
+        body: JSON.stringify({
+          product_id: itemId,
+          quantity: 1,
+          variant_id: null,
+        }),
       })
+
         .then((response) => response.json())
-        .then((data) => console.log("getcartdata", data));
+        .then((data) => console.log("Add To cart", data))
+        .catch((err) => console.error("Error adding to cart", err));
     }
   };
 
@@ -127,13 +160,13 @@ const ContextProvider = ({ children }) => {
   //     ...prev,
   //     [itemId]: prev[itemId] > 0 ? prev[itemId] - 1 : 0,
   //   }));
-  //   if (localStorage.getItem('auth-token')) {
+  //   if (localStorage.getItem('access_token')) {
   //     try {
   //       const response = await fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452/cart/remove', {
   //         method: 'POST',
   //         headers: {
   //           Accept: 'application/json',
-  //           'auth-token': `${localStorage.getItem('auth-token')}`,
+  //           'access_token': `${localStorage.getItem('access_token')}`,
   //           'Content-Type': 'application/json',
   //         },
   //         body: JSON.stringify({ "itemId": itemId }),
@@ -147,7 +180,7 @@ const ContextProvider = ({ children }) => {
 
   // };
 
-  const updatequa = async (itemId) => {
+  const update = async (itemId) => {
     const newQuantity = cartItem[itemId] - 1;
 
     if (newQuantity > 0) {
@@ -156,13 +189,14 @@ const ContextProvider = ({ children }) => {
         [itemId]: newQuantity,
       }));
 
-      if (localStorage.getItem('auth-token')) {
+      if (localStorage.getItem('access_token')) {
         try {
           const response = await fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452/cart/update', {
-            method: 'POST',
+            method: 'PUT',
             headers: {
               Accept: 'application/json',
-              'auth-token': localStorage.getItem('auth-token'),
+              // 'access_token': localStorage.getItem('access_token'),
+              'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({ itemId, quantity: newQuantity }),
@@ -178,7 +212,6 @@ const ContextProvider = ({ children }) => {
     }
   };
 
-
   // removefrom cart
   const remove = async (itemId) => {
     setCartItem((prev) => {
@@ -187,14 +220,15 @@ const ContextProvider = ({ children }) => {
       return updatedCart;
     });
 
-
-    if (localStorage.getItem('auth-token')) {
+    if (localStorage.getItem('access_token')) {
       try {
         const response = await fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/cart/remove', {
-          method: 'POST',
+          method: 'DELETE',
           headers: {
             Accept: 'application/json',
-            'auth-token': `${localStorage.getItem('auth-token')}`,
+            // 'access_token': `${localStorage.getItem('access_token')}`,
+            'Authorization': `Bearer ${token}`,
+
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ "itemId": itemId }),
@@ -210,13 +244,14 @@ const ContextProvider = ({ children }) => {
   // clearcart
   const clearcart = async (itemId) => {
     setCartItem({});
-    if (localStorage.getItem('auth-token')) {
+    if (localStorage.getItem('access_token')) {
       try {
         const response = await fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/wishlist/clear', {
-          method: 'POST',
+          method: 'DELETE',
           headers: {
             Accept: 'application/json',
-            'auth-token': `${localStorage.getItem('auth-token')}`,
+            // 'access_token': `${localStorage.getItem('access_token')}`,
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ "itemId": itemId }),
@@ -229,8 +264,6 @@ const ContextProvider = ({ children }) => {
     }
   };
 
-
-
   // wishlist
 
   // Add to Wishlist
@@ -239,12 +272,13 @@ const ContextProvider = ({ children }) => {
       ...prev,
       [itemId]: (prev[itemId] || 0) + 1,
     }));
-    if (localStorage.getItem('auth-token')) {
+    if (localStorage.getItem('access_token')) {
       fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/wishlist/add', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
-          'auth-token': `${localStorage.getItem('auth-token')}`,
+          // 'access_token': `${localStorage.getItem('access_token')}`,
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ "itemId": itemId }),
@@ -254,7 +288,6 @@ const ContextProvider = ({ children }) => {
     }
   };
 
-
   // removewishlist
   const removeFromWishlist = async (itemId) => {
     setwishItem((prev) => {
@@ -263,13 +296,14 @@ const ContextProvider = ({ children }) => {
       return updatedCart;
     });
 
-    if (localStorage.getItem('auth-token')) {
+    if (localStorage.getItem('access_token')) {
       try {
         const response = await fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/wishlist/remove', {
-          method: 'POST',
+          method: 'DELETE',
           headers: {
             Accept: 'application/json',
-            'auth-token': `${localStorage.getItem('auth-token')}`,
+            // 'access_token': `${localStorage.getItem('access_token')}`,
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ "itemId": itemId }),
@@ -286,13 +320,14 @@ const ContextProvider = ({ children }) => {
   const clearwishlist = async (itemId) => {
     setwishItem({});
 
-    if (localStorage.getItem('auth-token')) {
+    if (localStorage.getItem('access_token')) {
       try {
         const response = await fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/wishlist/clear', {
-          method: 'POST',
+          method: 'DELETE',
           headers: {
             Accept: 'application/json',
-            'auth-token': `${localStorage.getItem('auth-token')}`,
+            // 'access_token': `${localStorage.getItem('access_token')}`,
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ "itemId": itemId }),
@@ -304,7 +339,6 @@ const ContextProvider = ({ children }) => {
       }
     }
   };
-
 
   // refreshtoken
   const Refreshtoken = async () => {
@@ -323,7 +357,7 @@ const ContextProvider = ({ children }) => {
       const data = await response.json();
 
       if (data.accessToken) {
-        localStorage.setItem("auth-token", data.accessToken);
+        localStorage.setItem("access_token", data.accessToken);
         return data.accessToken;
       } else {
         console.log("Refresh token invalid or expired");
@@ -347,7 +381,7 @@ const ContextProvider = ({ children }) => {
     addwishlist,
     removeFromWishlist,
     clearwishlist,
-    updatequa,
+    update,
     Refreshtoken
   };
 

@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import SareeProps from './SareeProps';
 import { Autoplay, Navigation } from 'swiper/modules';
-import { useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -10,7 +9,7 @@ import 'swiper/css/pagination';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa6';
 import { ProductContext } from '../Context';
 
-const ProductBottom = ({ category }) => {
+const ProductBottom = ({ category, product }) => {
     const { products = [] } = useContext(ProductContext) || {};
     const filtered = products.filter(item =>
         item.name?.toLowerCase().includes(category?.toLowerCase())
@@ -44,7 +43,6 @@ const ProductBottom = ({ category }) => {
         }
     }, []);
 
-
     return (
         <>
             {/* Description Section */}
@@ -55,11 +53,7 @@ const ProductBottom = ({ category }) => {
                 </div>
                 {menuOpen && (
                     <ul className="pl-4 pb-4 text-[14px] leading-6 text-[#333]">
-                        <li>Red Embroidered Poly Blend Saree Set - XSR30702</li>
-                        <li>Main Color: Red</li>
-                        <li>Package Contents: 2</li>
-                        <li>Fabric: Poly Blend</li>
-                        <li>Work: Embroidered</li>
+                        <li >{product.description}</li>
                     </ul>
                 )}
             </div>
