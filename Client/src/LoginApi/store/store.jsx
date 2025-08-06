@@ -1,6 +1,9 @@
 import { create } from 'zustand';
 import axios from 'axios';
 
+export const BASE_URL = 'https://dhaneri-backend.vercel.app/api';
+export const STORE_ID = '6874da6ef34b88733c0b452c';
+
 const store = create((set) => ({
   user: null,
   error: null,
@@ -9,21 +12,22 @@ const store = create((set) => ({
 
   login: async ({ email, password }) => {
     try {
-      const res = await axios.post('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/auth/login', { email, password });
+      const res = await axios.post(`${BASE_URL}/api/auth/login`, { email, password });
       console.log(res.data.data.user);
 
       const userData = {
         name: res.data.data.user.name,
         email: res.data.data.user.email,
         token: res.data.data.accessToken,
+        userId: res.data.data.user._id
       };
 
       localStorage.setItem('name', userData.name);
       localStorage.setItem('email', userData.email);
       localStorage.setItem('access_token', userData.token);
+      localStorage.setItem('user_id', userData.userId);
 
       console.log("token:", localStorage.getItem('access_token'));
-
 
       set({ user: res.data.data.user, error: null });
       return { success: true };
@@ -36,7 +40,7 @@ const store = create((set) => ({
 
   signup: async (formData) => {
     try {
-      const res = await axios.post('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/auth/register', formData);
+      const res = await axios.post(`${BASE_URL}/api/auth/register`, formData);
       console.log("Registration success:", res.data);
       set({ registered: true, error: null });
       return { success: true };
@@ -49,7 +53,7 @@ const store = create((set) => ({
 
   forgot: async (email) => {
     try {
-      const res = await axios.post('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/auth/forgot-password', { email });
+      const res = await axios.post(`${BASE_URL}/api/auth/forgot-password`, { email });
       console.log(res.data);
       alert(res.data.message);
       return true;
@@ -62,9 +66,9 @@ const store = create((set) => ({
 
   logout: async () => {
     try {
-      await axios.post('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/auth/logout');
+      await axios.post(`${BASE_URL}/api/auth/logout`);
       set({ user: null });
-      localStorage.removeItem('auth-token');
+      localStorage.removeItem('access_token');
       console.log('Logged out');
     } catch (err) {
       console.log(err);

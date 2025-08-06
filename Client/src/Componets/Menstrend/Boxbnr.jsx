@@ -13,7 +13,7 @@ import Aos from 'aos';
 const Boxbnr = ({ category }) => {
     const { id } = useParams();
 
-    const { products } = useContext(ProductContext);
+    const { products, BASE_URL, STORE_ID } = useContext(ProductContext);
 
     const [product, setProduct] = useState(null);
     const [error, setError] = useState(null);
@@ -22,7 +22,7 @@ const Boxbnr = ({ category }) => {
     useEffect(() => {
         const Newarrival = async () => {
             try {
-                const response = await fetch(`http://65.1.3.198:5050/api/storefront/store/6874da6ef34b88733c0b452c/products/new-arrivals?limit=8`);
+                const response = await fetch(`${BASE_URL}/api/storefront/store/${STORE_ID}/products/new-arrivals?limit=8`);
                 const data = await response.json();
                 setProduct(data.data.product);
                 console.log("New Arrival: ", data);

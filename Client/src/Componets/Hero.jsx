@@ -1,12 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Autoplay, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { ProductContext } from './Context';
 
 const Hero = () => {
+    const { BASE_URL, STORE_ID } = useContext(ProductContext);
+
     const prevRef = useRef(null);
     const nextRef = useRef(null);
     const swiperRef = useRef(null);
@@ -17,7 +20,7 @@ const Hero = () => {
 
         const fetchImages = async () => {
             try {
-                const res = await fetch('https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/hero');
+                const res = await fetch(`${BASE_URL}/api/storefront/store/${STORE_ID}/hero`);
                 const data = await res.json();
                 console.log("Fetched hero data:", data);
                 setImages(data?.data || []);

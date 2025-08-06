@@ -10,16 +10,14 @@ import Tredishnalbnr from '../Componets/Tredishnals/Tredishnalbnr'
 import Hero from '../Componets/Hero'
 import Homevideo from '../Componets/Tredishnals/Homevideo'
 import Bestselr from '../Componets/bestselr/Bestselr'
-import Hero2 from '../Componets/hero2'
 
 const Landing = () => {
     return (
         <>
-            {/* <Hero2 /> */}
             <Hero />
             <Homebox />
             {/* <Homeoffer category="sarees" /> */}
-            <Boxbnr category="sarees" />
+            <Boxbnr category="DEMO" />
             <Trenditem category="Mens" />
             <Womensbnr />
             <Featured />

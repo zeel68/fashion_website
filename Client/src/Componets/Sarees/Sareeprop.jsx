@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 
 const Sareeprop = ({ title, options = [] }) => {
     const [isOpen, setIsOpen] = useState(false);
-
     return (
         <>
             <div className="w-[170px] relative text-[#919191] text-[12px] mx-2 mb-3">
@@ -32,8 +31,6 @@ const Sareeprop = ({ title, options = [] }) => {
                     </ul>
                 </div>
             </div>
-
-
         </>
     )
 }
@@ -99,6 +96,4 @@ export const Product = ({ images, name, price, oldprice, delivery, id }) => {
 
         </>
     )
-}
-
-
+} 
