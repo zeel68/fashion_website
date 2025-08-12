@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import axios from 'axios';
 
-export const BASE_URL = 'https://dhaneri-backend.vercel.app/api';
+export const BASE_URL = 'http://192.168.29.199:5050';
 export const STORE_ID = '6874da6ef34b88733c0b452c';
 
 const store = create((set) => ({
@@ -10,10 +10,38 @@ const store = create((set) => ({
   registered: false,
   message: null,
 
+  refresh: async () => {
+    try {
+      const refreshToken = localStorage.getItem('refresh_token');
+      if (!refreshToken) {
+        console.log('No refresh token found');
+        return { success: false, message: 'No refresh token' };
+      }
+
+      const res = await axios.post(`${BASE_URL}/api/auth/refresh-token`, {
+        refreshToken: refreshToken
+      });
+
+      console.log("Refresh success:", res.data);
+
+      if (res.data.accessToken) {
+        localStorage.setItem('access_token', res.data.accessToken);
+        console.log("New access token stored");
+        return { success: true };
+      }
+
+      return { success: false, message: 'No access token received' };
+    } catch (err) {
+      console.error("Refresh error:", err.response?.data || err.message);
+      set({ error: err.response?.data?.error || err.message });
+      return { success: false, message: err.response?.data?.error || err.message };
+    }
+  },
+
   login: async ({ email, password }) => {
     try {
       const res = await axios.post(`${BASE_URL}/api/auth/login`, { email, password });
-      console.log(res.data.data.user);
+      console.log("Login response:", res.data);
 
       const userData = {
         name: res.data.data.user.name,
@@ -27,8 +55,12 @@ const store = create((set) => ({
       localStorage.setItem('access_token', userData.token);
       localStorage.setItem('user_id', userData.userId);
 
-      console.log("token:", localStorage.getItem('access_token'));
+      if (res.data.data.refreshToken) {
+        localStorage.setItem('refresh_token', res.data.data.refreshToken);
+        console.log("Refresh token stored", res.data.data.refreshToken);
+      }
 
+      console.log("Access token:", localStorage.getItem('access_token'));
       set({ user: res.data.data.user, error: null });
       return { success: true };
     } catch (err) {
@@ -68,7 +100,13 @@ const store = create((set) => ({
     try {
       await axios.post(`${BASE_URL}/api/auth/logout`);
       set({ user: null });
+
       localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+      localStorage.removeItem('name');
+      localStorage.removeItem('email');
+      localStorage.removeItem('user_id');
+
       console.log('Logged out');
     } catch (err) {
       console.log(err);
@@ -78,7 +116,7 @@ const store = create((set) => ({
 
   resetStatus: () => {
     set({ registered: false });
-  },
+  }
 }));
 
 export default store;

@@ -19,7 +19,6 @@ const Trenditem = ({ category }) => {
         )
         : SareesDetails;
 
-
     // const filteredProducts = category
     //     ? products.filter(p => p.category?.toLowerCase() === category.toLowerCase())
     //     : products;

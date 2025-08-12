@@ -11,6 +11,7 @@ import { useParams } from 'react-router-dom';
 import Aos from 'aos';
 
 const Boxbnr = ({ category }) => {
+
     const { id } = useParams();
 
     const { products, BASE_URL, STORE_ID } = useContext(ProductContext);

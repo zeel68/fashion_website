@@ -48,9 +48,9 @@ const Productdetails = () => {
                         {/* right-side */}
                         <ProductTopRight product={product} />
                         {/* bottom similary */}
-                        <ProductBottom category="DEMO" product={product} />
+                        <ProductBottom category="kurti" product={product} />
                         {/* Also Like */}
-                        <AlsoLike category="DEMO" />
+                        <AlsoLike category="kurti" />
 
                         <div className="w-full mx-auto flex justify-center gap-4 px-4">
                             <div className="w-full md:w-[46%] pt-[50px] text-center">

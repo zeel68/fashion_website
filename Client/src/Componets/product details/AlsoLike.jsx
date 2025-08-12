@@ -84,7 +84,7 @@ const AlsoLike = ({ category }) => {
                             <SwiperSlide key={item._id}>
                                 <SareeProps
                                     id={item._id}
-                                    image={item.image}
+                                    image={item.images[0]}
                                     title={item.name}
                                     price={item.price}
                                 />

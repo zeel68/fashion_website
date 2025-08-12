@@ -9,7 +9,7 @@ import Login from './Login';
 import { CiHeart } from 'react-icons/ci';
 
 const Navbar = ({ category }) => {
-    const Nav = ["Category", "Women_clothing", "DEMO121", "T-Shirt", "DEMO", "Sarees", "DEMO1", "Kids", "Jewellery", "Blouses", "Dupattas", "Festivals", "Home_Living"];
+    const Nav = ["Category", "Women_clothing", "Kurti", "T-Shirt", "DEMO", "Sarees", "DEMO1", "Kids", "Jewellery", "Blouses", "Dupattas", "Festivals", "Home_Living"];
     const { products = [], cartItem, wishItem } = useContext(ProductContext) || {};
     // const filtered = products.filter(item => item.category === category);
     // const filteredProducts = products.filter(item =>
@@ -83,6 +83,17 @@ const Navbar = ({ category }) => {
                                     </Link>
                                 </li>
                                 {/* Cart Icon */}
+                                {/* <li>
+                                    <Link to="/cart" className="relative px-2 flex items-center justify-center">
+                                        <IoCartOutline size={20} />
+                                        {totalCartItems > 0 && (
+                                            <span className="absolute -top-1 -right-1 bg-red-700 text-white text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                                                {totalCartItems}
+                                            </span>
+                                        )}
+                                    </Link>
+                                </li> */}
+
                                 <li>
                                     <Link to="/cart" className="relative px-2 flex items-center justify-center">
                                         <IoCartOutline size={20} />
@@ -93,6 +104,7 @@ const Navbar = ({ category }) => {
                                         )}
                                     </Link>
                                 </li>
+
 
 
                             </ul>

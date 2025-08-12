@@ -138,7 +138,7 @@ const Sareesitem = ({ category }) => {
                                     <Product
                                         key={index}
                                         id={product._id}
-                                        images={product.images}
+                                        images={product.images[0]}
                                         img2={product.img2}
                                         name={product.name}
                                         price={product.price}

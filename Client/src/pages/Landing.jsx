@@ -11,7 +11,7 @@ import Hero from '../Componets/Hero'
 import Homevideo from '../Componets/Tredishnals/Homevideo'
 import Bestselr from '../Componets/bestselr/Bestselr'
 
-const Landing = () => {
+const Landing = (BASE_URL, STORE_ID) => {
     return (
         <>
             <Hero />

@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import { ProductContext } from '../Context';
 
 const MyOrder = () => {
   const [orders, setOrders] = useState([]);
+  const { BASE_URL, STORE_ID } = useContext(ProductContext);
 
   const fetchOrders = async () => {
     try {
       const token = localStorage.getItem("auth-token");
-      const res = await axios.get(`https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/orders/${id}`, {
+      const res = await axios.get(`${BASE_URL}/api/storefront/store/${STORE_ID}/orders/${id}`, {
         headers: {
           "auth-token": token
         }

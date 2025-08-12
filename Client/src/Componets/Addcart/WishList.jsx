@@ -9,7 +9,11 @@ const WishList = () => {
     const wishlistProducts = products.filter(product => wishItem[product._id] > 0);
 
     const navigate = useNavigate();
-    console.log("Wish Items:", wishItem);
+    // console.log("Wish Items:", wishItem);
+
+    if (!products.length) {
+        return <div className="main"><Carthader /><div className="p-10">Loading...</div></div>;
+    }
 
     if (wishlistProducts.length === 0) {
         return (
@@ -21,7 +25,6 @@ const WishList = () => {
             </div>
         );
     }
-
     return (
         <div className="main">
             <Carthader />
@@ -30,7 +33,7 @@ const WishList = () => {
                 {wishlistProducts.map(product => (
                     <div key={product._id} className="flex border border-[#ececec] mb-4">
                         <div className="p-4">
-                            <img src={product.image} alt={product.name} className="w-[110px] h-[120px] block" />
+                            <img src={product.images[0]} alt={product.name} className="w-[110px] h-[120px] block" />
                         </div>
                         <div className="w-full p-4">
                             <div className="flex flex-wrap justify-between">
