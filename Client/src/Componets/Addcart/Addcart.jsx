@@ -12,16 +12,14 @@ const Addcart = () => {
     const { cartItem, update, clearcart, remove, addTocart, products } = useContext(ProductContext);
     const navigate = useNavigate();
 
-    const cartProducts = Object.entries(cartItem)
-        .filter(([id, qty]) => qty > 0)
-        .map(([id, qty]) => {
-            const product = products.find(p => p._id === id);
-            return product ? {
-                _id: id,
-                quantity: qty,
-                product_id: product
-            } : null;
-        })
+    const cartProducts = Object.entries(cartItem).filter(([id, qty]) => qty > 0).map(([id, qty]) => {
+        const product = products.find(p => p._id === id);
+        return product ? {
+            _id: id,
+            quantity: qty,
+            product_id: product
+        } : null;
+    })
         .filter(Boolean);
 
     const calculateTotal = () => {

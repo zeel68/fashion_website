@@ -10,10 +10,12 @@ const Profile = () => {
                     <div className='mb-4'>
                         <h2 className="text-lg font-semibold mb-2">Contact Information</h2>
                         <div className="bg-white p-6 rounded shadow space-y-4">
+
                             <input
                                 type="email"
-                                placeholder="aesvi2003@gmail.com"
+                                placeholder=""
                                 className="w-full border p-2 rounded text-sm"
+                                value={localStorage.getItem("email")}
                             />
 
                             <div className="flex gap-4">
@@ -26,6 +28,7 @@ const Profile = () => {
                                     type="tel"
                                     placeholder="Phone Number"
                                     className="w-2/3 border p-2 rounded focus:outline-none text-sm"
+                                    value={localStorage.getItem("phone_number")}
                                 />
                             </div>
 
@@ -42,7 +45,7 @@ const Profile = () => {
 
                             <div className="flex justify-between">
                                 <label className="text-gray-600">First Name</label>
-                                <p className="text-gray-800">user</p>
+                                <p className="text-gray-800">{localStorage.getItem("name")}</p>
                             </div>
 
                             <div className="flex justify-between">

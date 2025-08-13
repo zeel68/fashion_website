@@ -8,6 +8,7 @@ const ProductTopRight = ({ product }) => {
   // const { id } = useParams();
   const { addTocart, addwishlist } = useContext(ProductContext);
   // const product = products.find(p => p._id === (id));
+
   if (!product) return <div>Product not found</div>;
 
   return (
@@ -57,18 +58,16 @@ const ProductTopRight = ({ product }) => {
         >
           ADD TO BAG
         </button>
+        <button
+          onClick={() => {
+            // console.log("Added to cart:", product);
+            addwishlist(product._id);
+          }}
+          className="text-center text-[12px] pt-[17px] pb-[17px] pl-[10px] border border-[#dcdcdc] ml-[3%] box-border bg-white text-black pr-[10px] w-[42%] font-bold tracking-[1px] hover:bg-red-800 hover:text-white transition duration-300 ease-in-out">
+          ADD TO WISHLIST
+        </button>
 
-        <Link onClick={() => {
-          // console.log("Added to wish:", product);
-          addwishlist(product._id);
-        }} className='text-center text-[12px] pt-[17px] pb-[17px] pl-[10px] border border-[#dcdcdc] ml-[3%] box-border bg-white text-black pr-[10px] w-[42%] font-bold tracking-[1px] hover:bg-red-800 hover:text-white transition duration-300 ease-in-out'>
-          ADD TO WISHLIST
-        </Link>
-        {/* <Link
-          className='text-center text-[12px] pt-[17px] pb-[17px] pl-[10px] border border-[#dcdcdc] ml-[3%] box-border bg-white text-black pr-[10px] w-[42%] font-bold tracking-[1px] hover:bg-red-800 hover:text-white transition duration-300 ease-in-out'
-        >
-          ADD TO WISHLIST
-        </Link> */}
+
       </div>
 
       <div className="mt-[13px] flex flex-wrap align-middle">

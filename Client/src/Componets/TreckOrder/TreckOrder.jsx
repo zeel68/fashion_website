@@ -11,17 +11,16 @@ const TreckOrder = () => {
     return (
         <>
             <div className="bg-[#f3f3f3] min-w-screen-xxl h-full p-6">
-
                 <div className="flex gap-8">
                     {/* Sidebar */}
                     <div className="bg-white w-64 p-6 rounded shadow-sm">
 
                         <div className="flex flex-col items-center text-center border-b pb-4 mb-4">
                             <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-xl font-semibold text-gray-600">
-                                a
+                                {localStorage.getItem("name")?.charAt(0).toUpperCase()}
                             </div>
-                            <p className="mt-2 text-gray-600 font-medium">Hello,</p>
-                            <p className="text-sm text-gray-500">user123@gmail.com</p>
+                            <p className="mt-2 text-gray-600 font-medium"> Hello, {localStorage.getItem("name")}</p>
+                            <p className="text-sm text-gray-500">{localStorage.getItem("email")}</p>
                         </div>
 
                         <ul className="space-y-4 text-sm font-medium text-gray-700">

@@ -8,7 +8,7 @@ function Layout() {
     return (
       <>
         <div className="sm:p-6 max-w-screen-xxl  mx-auto">
-            <div className="flex text-[18px] bg-[#f3f3f3] rounded shadow-sm">
+            <div className="flex text-[18px] bg-white rounded shadow-sm">
                 {/* <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} /> */}
                 <TreckOrder sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 

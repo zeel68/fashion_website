@@ -1,17 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { LuBadgePercent } from "react-icons/lu";
+import { ProductContext } from '../Context';
 
 const CouponPopup = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [couponCode, setCouponCode] = useState('');
     const [message, setMessage] = useState('');
-
+    const { BASE_URL, STORE_ID } = useContext(ProductContext);
     const handlecoupon = async () => {
         try {
-            const response = await fetch(`https://dhaneri-backend-7nkti8s6z-zeshs-projects.vercel.app/api/storefront/store/6874da6ef34b88733c0b452c/cart/coupon`, {
+            
+            const token = localStorage.getItem("access_token");
+            const response = await fetch(`${BASE_URL}/api/storefront/store/${STORE_ID}/cart/coupon`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${token}`
+
                 },
                 body: JSON.stringify({ coupon: couponCode })
             });

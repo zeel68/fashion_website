@@ -15,7 +15,7 @@ const Contact = () => {
 
             <div className='pt-3'>
               <h3 className="font-semibold">Email:</h3>
-              <p className="">customercare@dhaneri.com</p>
+              <p className="">{localStorage.getItem("email")}</p>
             </div>
 
             <div className='pt-3'>
@@ -35,7 +35,7 @@ const Contact = () => {
             </div>
 
             <div className='pt-3'>
-              
+
               <h3 className="font-semibold">Return Address:</h3>
               <p>High Street Essentials Pvt Ltd</p>
               <p>Plot No-39, Block-C, Sector-58,</p>

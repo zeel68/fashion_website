@@ -37,7 +37,7 @@ const Sareeprop = ({ title, options = [] }) => {
 
 export default Sareeprop;
 
-export const Product = ({ images, name, price, oldprice, delivery, id }) => {
+export const Product = ({ images, image, name, price, oldprice, delivery, id }) => {
     return (
         <>
             {/* product section */}
@@ -49,7 +49,7 @@ export const Product = ({ images, name, price, oldprice, delivery, id }) => {
                         <div className="relative w-full overflow-hidden group">
                             {/* Img 1  */}
 
-                            <div className="absolute top-2 right-2 h-[40px] w-[40px] bg-black text-white text-[11px] font-semibold px-2.5 py-1 rounded-full z-10">
+                            <div className="absolute top-2 right-2 h-[40px] w-[40px] bg-black text-white text-[11px] font-semibold px-2.5 py-1 rounded-full z-1">
                                 60% OFF
                             </div>
 
@@ -61,7 +61,7 @@ export const Product = ({ images, name, price, oldprice, delivery, id }) => {
                             {/* img 2 Hover */}
                             <img
                                 className="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-[400ms] ease-in-out opacity-0 group-hover:opacity-100"
-                                src={images}
+                                src={image}
                                 alt="saree-hover"
                             />
                             <div className="absolute bottom-0 left-0 text-center bg-[rgba(226,226,226)] p-[5px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">

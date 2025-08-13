@@ -5,30 +5,40 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 const VerifyEmail = ({ email, onClose }) => {
     const [otp, setOtp] = useState('');
     const [newPassword, setNewPassword] = useState('');
+    const { verifyEmail } = store();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+
         if (!otp || !newPassword) {
             alert('Please enter OTP and new password');
             return;
         }
 
+
+        const verified = await verifyEmail(email, otp);
+        if (!verified) return;
+
+
         try {
-            const res = await axios.post('http://65.1.3.198:5050/api/auth/reset-password', {
-                email,
-                otp,
-                newPassword,
-            });
+            const res = await axios.post(
+                'https://dhaneri-backend.vercel.app/api/auth/reset-password',
+                {
+                    email,
+                    otp,
+                    newPassword
+                }
+            );
             alert(res.data.message);
             setOtp('');
             setNewPassword('');
             onClose();
         } catch (err) {
-            console.log(err);
+            console.error(err);
             alert(err.response?.data?.error || 'Failed to reset password');
         }
     };
-
     return (
         <div className="w-full max-w-md bg-white p-[40px] rounded-lg shadow-md relative">
             <IoCloseCircleOutline

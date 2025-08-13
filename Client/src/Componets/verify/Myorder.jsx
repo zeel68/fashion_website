@@ -1,22 +1,32 @@
+
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { ProductContext } from '../Context';
 
-const MyOrder = () => {
+const MyOrders = () => {
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { BASE_URL, STORE_ID } = useContext(ProductContext);
 
   const fetchOrders = async () => {
     try {
-      const token = localStorage.getItem("auth-token");
-      const res = await axios.get(`${BASE_URL}/api/storefront/store/${STORE_ID}/orders/${id}`, {
+      setLoading(true);
+      const token = localStorage.getItem("access_token");
+
+      const res = await axios.get(`${BASE_URL}/api/storefront/store/${STORE_ID}/orders?page=1&limit=10`, {
         headers: {
-          "auth-token": token
-        }
-      });
-      setOrders(res.data.orders);
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+      }
+      );
+
+      setOrders(res.data.orders || res.data.data?.orders || []);
     } catch (err) {
       console.error("Failed to fetch orders:", err.message);
+      setOrders([]);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -24,38 +34,59 @@ const MyOrder = () => {
     fetchOrders();
   }, []);
 
+  if (loading) {
+    return <div className="p-4">Loading orders...</div>;
+  }
+
+  if (!orders.length) {
+    return <div className="p-4">No orders found.</div>;
+  }
+
   return (
-    <div className="p-4">
-      <div className="  max-w-screen-xxl  mx-auto">
-        <h2 className="text-xl font-bold mb-4">My Orders</h2>
-        {orders.length === 0 ? (
-          <p>No orders yet.</p>
-        ) : (
-          orders.map((order) => (
-            <div key={order._id} className="border p-4 rounded mb-4">
-              <p className="text-sm text-gray-600">Order ID: {order._id}</p>
-              <p className="text-sm text-gray-600">Date: {new Date(order.createdAt).toLocaleString()}</p>
-              <div className="mt-2">
-                {order.items.map((item, index) => (
-                  <div key={index} className="flex justify-between">
-                    <span>{item.name} x {item.quantity}</span>
-                    <span>₹{item.price * item.quantity}</span>
-                  </div>
-                ))}
+    <div className="p-4 max-w-screen-xxl mx-auto">
+      <h2 className="text-[20px] text-[#555] font-semibold mb-4">
+        My Orders ({orders.length})
+      </h2>
+
+      {orders.map((order, idx) => (
+        <div key={order._id || idx} className="border border-[#ececec] p-4 rounded mb-6">
+          <p className="text-sm text-gray-600">
+            Date: {order.created_at ? new Date(order.created_at).toLocaleString() : "N/A"}
+          </p>
+
+          <div className="mt-4">
+            {order.items?.map((item, index) => (
+              <div key={index} className="flex justify-between items-center mb-3">
+                <div className="flex items-center">
+                  <img
+                    src={item.product_id?.images?.[0]}
+                    alt={item.product_id?.name}
+                    className="w-[100px] h-[130px] object-cover mr-3"
+                  />
+                  <span>{item.product_id?.name} x {item.quantity}</span>
+                </div>
+
+                <div className="text-sm text-gray-500">
+                  {order.shipping_address?.street},<br />
+                  {order.shipping_address?.city},<br />
+                  {order.shipping_address?.state}, {order.shipping_address?.country}
+                </div>
+
+                <div>
+                  ₹{((item.price || 0) * (item.quantity || 0)).toFixed(2)}
+                </div>
               </div>
-              <div className="mt-2 text-sm text-gray-700">
-                <p><strong>Address:</strong> {order.address.street}, {order.address.city}, {order.address.state} - {order.address.zipCode}</p>
-                <p><strong>Phone:</strong> {order.address.phone}</p>
-              </div>
-              <div className="mt-2 font-semibold">
-                Total: ₹{order.amount}
-              </div>
-            </div>
-          ))
-        )}
-      </div>
+            ))}
+          </div>
+
+          <div className="mt-4 border-t border-[#ececec] pt-2 font-bold flex justify-end">
+            Total: ₹{order.total || 0}
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
 
-export default MyOrder;
+export default MyOrders;
+

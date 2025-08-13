@@ -3,7 +3,7 @@ import React from 'react'
 const Credits = () => {
   return (
     <>
-      <div className="max-w-screen-xxl mx-auto px-4 py-10 font-'Lato', sans-serif">
+      <div className="max-w-screen-xxl mx-auto px-4 py-10 font-'Lato', sans-serif ">
         <div className="bg-[#f3f3f3] p-2 ">
           <h2 className='text-lg font-bold'>My Credits</h2>
 

@@ -139,7 +139,7 @@ const Sareesitem = ({ category }) => {
                                         key={index}
                                         id={product._id}
                                         images={product.images[0]}
-                                        img2={product.img2}
+                                        image={product.images[1]}
                                         name={product.name}
                                         price={product.price}
                                         oldprice={product.oldprice}

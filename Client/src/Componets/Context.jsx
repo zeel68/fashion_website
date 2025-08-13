@@ -2,8 +2,12 @@ import React, { createContext, useState, useEffect } from 'react';
 
 export const ProductContext = createContext(null);
 
-const BASE_URL = 'http://192.168.29.199:5050';
+const BASE_URL = 'https://dhaneri-backend.vercel.app';
 const STORE_ID = '6874da6ef34b88733c0b452c';
+
+// http://192.168.29.199:5050
+
+// https://dhaneri-backend.vercel.app
 
 // const getDefaultCart = () => {
 //   let cart = {};
@@ -12,12 +16,11 @@ const STORE_ID = '6874da6ef34b88733c0b452c';
 //   }
 //   return cart;
 // };
-
 const getInitialCart = () => {
   const storedCart = localStorage.getItem('cartItem');
   if (storedCart) {
     return JSON.parse(storedCart);
-  }    
+  }
   const cart = {};
   Products.forEach(product => {
     cart[product.id] = 0;
@@ -74,22 +77,31 @@ const ContextProvider = ({ children }) => {
             newCart[productId] = quantity;
           });
           setCartItem(newCart);
+          console.log("cart fetch", data.data.cart.items);
+
         })
 
       // get wishlist
       fetch(`${BASE_URL}/api/storefront/store/${STORE_ID}/wishlist`, {
         method: 'GET',
         headers: {
-          Accept: 'application/form-data',
-          // Accept: 'application/json',
+          Accept: 'application/json',
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         // body: "",
       }).then((response) => response.json())
         .then((data) => {
-          console.log("Wishlist:", data);
-          setwishItem(data || []);
+          const items = data.data?.wishlist || [];
+          const newwish = {};
+          items.forEach((item) => {
+            const productId = item.product_id._id;
+            const quantity = item.quantity;
+            newwish[productId] = quantity;
+          });
+          setwishItem(newwish);
+
+          console.log("wish fetch", data);
 
         })
         .catch((err) => console.error("Failed to fetch wishlist:", err));
@@ -104,27 +116,6 @@ const ContextProvider = ({ children }) => {
     localStorage.setItem('wishItem', JSON.stringify(wishItem));
   }, [wishItem]);
 
-  // add to cart
-  // const addTocart = (itemId) => {
-  //   setCartItem((prev) => ({
-  //     ...prev,
-  //     [itemId]: (prev[itemId] || 0) + 1,
-  //   }));
-  //   if (localStorage.getItem('access_token')) {
-  //     // fetch('http://localhost:4040/addtocart', {
-  //     fetch('${BASE_URL}/api/storefront/store/${STORE_ID}/cart/add', {
-  //       method: 'POST',
-  //       headers: {
-  //         Accept: 'application/json',
-  //         // 'access_token': ${localStorage.getItem('access_token')},
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({ "itemId": itemId }),
-  //     })
-  //       .then((response) => response.json())
-  //       .then((data) => console.log("getcartdata", data));
-  //   }
-  // };
 
   const addTocart = (itemId) => {
     setCartItem((prev) => ({
@@ -156,39 +147,14 @@ const ContextProvider = ({ children }) => {
     }
   };
 
-  // remove
-  // const removeTocart = async (itemId) => {
-  //   setCartItem((prev) => ({
-  //     ...prev,
-  //     [itemId]: prev[itemId] > 0 ? prev[itemId] - 1 : 0,
-  //   }));
-  //   if (localStorage.getItem('access_token')) {
-  //     try {
-  //       const response = await fetch('${BASE_URL}/api/storefront/store/6874da6ef34b88733c0b452/cart/remove', {
-  //         method: 'POST',
-  //         headers: {
-  //           Accept: 'application/json',
-  //           'access_token': ${localStorage.getItem('access_token')},
-  //           'Content-Type': 'application/json',
-  //         },
-  //         body: JSON.stringify({ "itemId": itemId }),
-  //       });
-  //       const data = await response.json();
-  //       console.log(data);
-  //     } catch (error) {
-  //       console.error('Failed to remove from cart', error);
-  //     }
-  //   }
 
-  // };
-
-  const update = async (itemId) => {
-    const newQuantity = cartItem[itemId] - 1;
+  const update = async (productId) => {
+    const newQuantity = cartItem[productId] - 1;
 
     if (newQuantity > 0) {
       setCartItem((prev) => ({
         ...prev,
-        [itemId]: newQuantity,
+        [productId]: newQuantity,
       }));
 
       if (localStorage.getItem('access_token')) {
@@ -201,7 +167,7 @@ const ContextProvider = ({ children }) => {
               'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ itemId, quantity: newQuantity }),
+            body: JSON.stringify({ product_id: productId, quantity: newQuantity }),
           });
           const data = await response.json();
           console.log("Quantity updated:", data);
@@ -214,11 +180,10 @@ const ContextProvider = ({ children }) => {
     }
   };
 
-  // removefrom cart
-  const remove = async (itemId) => {
+  const remove = async (productId) => {
     setCartItem((prev) => {
       const updatedCart = { ...prev };
-      delete updatedCart[itemId];
+      delete updatedCart[productId];
       return updatedCart;
     });
 
@@ -228,12 +193,10 @@ const ContextProvider = ({ children }) => {
           method: 'DELETE',
           headers: {
             Accept: 'application/json',
-            // 'access_token': ${localStorage.getItem('access_token')},
             'Authorization': `Bearer ${token}`,
-
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ "itemId": itemId }),
+          body: JSON.stringify({ "product_id": productId }),
         });
         const data = await response.json();
         console.log("Item delete:", data);
@@ -245,8 +208,7 @@ const ContextProvider = ({ children }) => {
 
   // clearcart
   const clearcart = async () => {
-    setCartItem({}); // Clear frontend state
-
+    setCartItem({});
     const token = localStorage.getItem('access_token');
     if (token) {
       try {
@@ -270,26 +232,30 @@ const ContextProvider = ({ children }) => {
 
   // wishlist
   // Add to Wishlist
-  const addwishlist = (itemId) => {
+  const addwishlist = (productId) => {
     setwishItem((prev) => ({
       ...prev,
-      [itemId]: (prev[itemId] || 0) + 1,
+      [productId]: (prev[productId] || 0) + 1,
     }));
-    if (localStorage.getItem('access_token')) {
+
+    const token = localStorage.getItem('access_token');
+
+    if (token) {
       fetch(`${BASE_URL}/api/storefront/store/${STORE_ID}/wishlist/add`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
-          // 'access_token': ${localStorage.getItem('access_token')},
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ "itemId": itemId }),
+        body: JSON.stringify({ product_id: productId }),
       })
         .then((response) => response.json())
-        .then((data) => console.log("Wishlist added:", data));
+        .then((data) => console.log("Wishlist added:", data))
+        .catch((err) => console.error("Wishlist error:", err));
     }
   };
+
 
   // removewishlist
   const removeFromWishlist = async (itemId) => {
@@ -344,34 +310,7 @@ const ContextProvider = ({ children }) => {
     }
   };
 
-  // refreshtoken
-  const Refreshtoken = async () => {
-    const refreshToken = localStorage.getItem("refresh-token");
-    if (!refreshToken) return null;
 
-    try {
-      const response = await fetch(`${BASE_URL}/api/auth/refresh-token`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ refreshToken })
-      });
-
-      const data = await response.json();
-
-      if (data.accessToken) {
-        localStorage.setItem("access_token", data.accessToken);
-        return data.accessToken;
-      } else {
-        console.log("Refresh token invalid or expired");
-        return null;
-      }
-    } catch (error) {
-      console.error("Error refreshing token", error);
-      return null;
-    }
-  };
 
   const contextValue = {
     products,
@@ -388,7 +327,7 @@ const ContextProvider = ({ children }) => {
     update,
     BASE_URL,
     STORE_ID,
-    Refreshtoken
+
   };
 
   return (

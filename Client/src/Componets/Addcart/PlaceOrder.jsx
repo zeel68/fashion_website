@@ -75,7 +75,7 @@ const PlaceOrder = ({ category }) => {
             );
 
             const result = response.data;
-            console.log(result);
+            console.log("order create", result);
 
             if (result.success) {
                 const res = await loadRazorpayScript();
@@ -88,23 +88,24 @@ const PlaceOrder = ({ category }) => {
 
                 const options = {
                     key: "rzp_test_2TD6bdPgMvp803",
-                    amount: (calculateTotal() + 2) * 100,
+                    amount: result.data.order.amount,
                     currency: "INR",
                     name: "dhaneri",
                     description: "Hello",
-                    order_id: result.data.order._id,
-                    handler: function (response) {
+                    order_id: result.data.razorpay_order_id,
+                    handler: async function (response) {
                         alert("Payment successful! Payment ID: " + response.razorpay_payment_id);
-                        navigate("/myorder");
+                        navigate(`/myorder`);
                     },
                     prefill: {
-                        name: "aesvi",
-                        email: "abc@gmail.com",
-                        contact: "123457890",
+                        name: result.data.order.user_id.name,
+                        email: result.data.order.user_id.email,
+                        contact: result.data.order.user_id.phone_number,
                     },
                     theme: {
-                        color: "#d4b952",
+                        color: "#3399cc",
                     },
+
                 };
                 console.log("options", options);
 

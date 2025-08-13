@@ -9,7 +9,6 @@ import { ProductContext } from './Context';
 
 const Hero = () => {
     const { BASE_URL, STORE_ID } = useContext(ProductContext);
-
     const prevRef = useRef(null);
     const nextRef = useRef(null);
     const swiperRef = useRef(null);
@@ -47,8 +46,8 @@ const Hero = () => {
 
     return (
         <div className="relative w-full">
-            <button ref={prevRef} className="absolute w-[40px] h-[40px] top-[50%] left-[2%] transform -translate-y-1/2 z-10 px-2 py-2 bg-white text-[#d3b951] border border-[#d0d0d0] rounded"><FaChevronLeft /></button>
-            <button ref={nextRef} className="absolute w-[40px] h-[40px] top-[50%] right-[2%] transform -translate-y-1/2 z-10 px-2 py-2 bg-white text-[#d3b951] border border-[#d0d0d0] rounded"><FaChevronRight /></button>
+            <button ref={prevRef} className="absolute w-[40px] h-[40px] top-[50%] left-[2%] transform -translate-y-1/2 flex justify-center align-middle items-center  z-10 px-2 py-2 bg-white text-[#d3b951] border border-[#d0d0d0] rounded cursor-pointer"><FaChevronLeft /></button>
+            <button ref={nextRef} className="absolute w-[40px] h-[40px] top-[50%] right-[2%] transform -translate-y-1/2 flex justify-center align-middle items-center z-10 px-2 py-2 bg-white text-[#d3b951] border border-[#d0d0d0] rounded cursor-pointer"><FaChevronRight /></button>
 
             <Swiper
                 modules={[Navigation, Autoplay]}

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useParams } from "react-router-dom";
 import { ProductContext } from '../Context';
 
-const ProductTop = ({product}) => {
+const ProductTop = ({ product }) => {
     // const { id } = useParams();
     // const { products } = useContext(ProductContext);
 
@@ -13,9 +13,6 @@ const ProductTop = ({product}) => {
     return (
         <div className="w-full max-w-[65%]">
             <div className="flex flex-wrap gap-2 mb-5">
-                {/* {product.images && product.images.map((imgUrl, i) => (
-                    <img key={i} className="w-[48%]" src={imgUrl} alt={`image`} />
-                ))} */}
                 {product.images?.map((imgUrl, i) => (
                     <img key={i} className="w-[48%]" src={imgUrl} alt={`product-${i}`} />
                 ))}
